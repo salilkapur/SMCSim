@@ -201,7 +201,8 @@ int main(int argc, char *argv[])
 
     #ifdef DEBUG_APP
     cout << "(main.cpp): Checking the tree ..." << endl;
-    ASSERT(check_tree(tree));
+    if (! check_tree(tree))
+        cout << "(main.cpp): Error in the tree!" << endl;
     #endif
 
     cout << "(main.cpp): Initializing the search list ... " << endl;

@@ -6,7 +6,7 @@ GEM5_STATISTICS=(
 "sim_ticks.host"
 )
 
-VALUES0=( "1.0" "2.0" "4.0" "8.0" )
+VALUES0=( "1.0" ) # "2.0" "4.0" "8.0" )
 
 for V0 in ${VALUES0[*]}
 do
@@ -24,7 +24,7 @@ do
 	export PIM_CLOCK_FREQUENCY_GHz=$V0
 	#####################
 	#####################
-	export OFFLOADED_TREE_HEIGHT=20				# Height of the balanced binary search tree
+	export OFFLOADED_TREE_HEIGHT=16				# Height of the balanced binary search tree
 	export OFFLOADED_NUM_OPERATIONS=1000		# Number of operations to perform on the tree (e.g. number of searches)
 	#####################
 	#####################

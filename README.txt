@@ -48,6 +48,7 @@
         ./smc.sh --config
 
     * You will be prompted before building the kernels
+
     * Please make the following checks before continuing:
         - Required tools are already installed and "[   OK  ]" is displayed.
         - Required libraries are all installed (specially protobuf)
@@ -84,6 +85,7 @@
           message in the telnet terminal:
             >>> Checkpointing simulation...
             >>> Exiting...
+
     * The first time that you run this simulation scenario, a checkpoint is
       automatically taken and the simulation exits. While, next times, the 
       simulation will resume from the checkpoint automatically and jump to the
@@ -93,9 +95,9 @@
         ./scenarios/0-demo/1-singlepim-pagerank.sh -o
 
     * Remember that user must be in sudoers list (to mount the disk images)
-    Again attach the terminal (telnet localhost 3456)
-    This time, you should see the following messages in the telnet terminal:
-    (Offloading and execution of the PageRank algorithm)
+      Again attach the terminal (telnet localhost 3456)
+      This time, you should see the following messages in the telnet terminal:
+      (Offloading and execution of the PageRank algorithm)
     
     ##############JOB START#################
     >>>> Install the driver
