@@ -1,0 +1,22 @@
+<component id="system.mc" name="mc">
+  <param name="type" value="0"/> <!-- 1: low power; 0 high performance -->
+  <param name="mc_clock" value="{{ 1/system.smccontroller.clk_domain.clock[0]/10**6 }}"/>
+  <param name="vdd" value="0"/>
+  <param name="peak_transfer_rate" value="{{ 1.6 * 10**14 }}"/>
+  <param name="block_size" value="{{ system.smccontroller.width }}"/><!--B-->
+  <param name="number_mcs" value="1"/>
+  <param name="memory_channels_per_mc" value="1"/>
+  <param name="number_ranks" value="2"/>
+  <param name="withPHY" value="0"/>
+  <param name="req_window_size_per_channel" value="32"/>
+  <param name="IO_buffer_size_per_channel" value="32"/>
+  <param name="databus_width" value="{{ system.smccontroller.width }}"/>
+  <param name="addressbus_width" value="{{ system.membus.width }}"/>
+  <!--TODO ERFAN-->
+  {% set reads = 0 %}
+  {% set writes = 0 %}
+  <!--TODO ERFAN-->
+  <stat name="memory_accesses" value="{{ reads + writes }}"/>
+  <stat name="memory_reads" value="{{ reads }}"/>
+  <stat name="memory_writes" value="{{ writes }}"/>
+</component>

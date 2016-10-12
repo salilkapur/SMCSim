@@ -1,0 +1,7 @@
+        zlibc
+        zlib1g
+        zlib1g-dev
+        libprotobuf-dev
+        protobuf-compiler
+        libgoogle-perftools-dev
+        python-pydot
