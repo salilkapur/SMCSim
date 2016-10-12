@@ -679,7 +679,7 @@ function check_external_tools
 # 	fi
 
     if [ -d $GEM5_BUILD_DIR/$CACTI ]; then
-        print_msg "CACTI: $GEM5_BUILD_DIR/$CACTI"
+        print_msg "CACTI: $GEM5_BUILD_DIR/$CACTI (For automatic rebuild, remove this directory)"
     else
         cp -r $GEM5_UTILS_DIR/$CACTI $GEM5_BUILD_DIR/
         print_msg "Building CACTI ..."

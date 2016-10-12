@@ -126,16 +126,6 @@ __EOF
 }
 
 #######################################################################################
-# Plot two statistics against each other
-#  $1: Y-Axis *.gnu (a)
-#  $2: X-Axis *.gnu (b)
-function plot_a_versus_b()
-{
-	$SMC_UTILS_DIR/merge_plots_y_y.py $SCENARIO_HOME_DIR $1 $2
-	plot $SCENARIO_HOME_DIR/plot_${1}_vs_${2}.gnu "$1 versus $2" "$2" "$1"
-}
-
-#######################################################################################
 # Plot bar graph
 #  $1: stat_name
 #  $2: sub_stat_name
@@ -733,18 +723,18 @@ function copy_to_disk_image()
 	sync
 	sleep 1
 
-	# Check if the data in extra.img has been consumed
-	# Read the busy flag. If it is set, we must unmount, and try again some seconds later.
-	# The data will be consumed automatically by the guest OS after some time, so all we
-	# have to do it to wait here.
-	if [ $1 == $GEM5_EXTRAIMAGE ]; then
-		if [ -f $SMC_WORK_DIR/temp_mount_dir/busy ]; then
-			print_msg "Unconsumed data in extra.img. Clearing it"
-            $SUDO_COMMAND  rm $SMC_WORK_DIR/temp_mount_dir/*
-        fi
-		touch $SMC_WORK_DIR/busy
- 		$SUDO_COMMAND  cp $SMC_WORK_DIR/busy $SMC_WORK_DIR/temp_mount_dir/
- 	fi
+# 	# Check if the data in extra.img has been consumed
+# 	# Read the busy flag. If it is set, we must unmount, and try again some seconds later.
+# 	# The data will be consumed automatically by the guest OS after some time, so all we
+# 	# have to do it to wait here.
+# 	if [ $1 == $GEM5_EXTRAIMAGE ]; then
+# 		if [ -f $SMC_WORK_DIR/temp_mount_dir/busy ]; then
+# 			print_msg "Unconsumed data in extra.img. Clearing it"
+#             $SUDO_COMMAND  rm $SMC_WORK_DIR/temp_mount_dir/*
+#         fi
+# 		touch $SMC_WORK_DIR/busy
+#  		$SUDO_COMMAND  cp $SMC_WORK_DIR/busy $SMC_WORK_DIR/temp_mount_dir/
+#  	fi
 
 	if ! [ -z $2 ]; then $SUDO_COMMAND  cp -f $2 $SMC_WORK_DIR/temp_mount_dir/	; fi
 	if ! [ -z $3 ]; then $SUDO_COMMAND  cp -f $3 $SMC_WORK_DIR/temp_mount_dir/	; fi
