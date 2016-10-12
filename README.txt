@@ -7,6 +7,7 @@
     already available components in gem5 (e.g. DMA engine, interconnects, DRAM
     Controllers), and some of them have been modified and extended to model
     other functionalities (e.g. serial links).
+
     * In order to build and run this environment, please refer to SECTION 3.
     * In order to better understand the simulation enviornment, please refer 
       to SECTION 4.
@@ -18,6 +19,8 @@
         Memory Architecture for the Smart Memory Cube." International 
         Conference on Architecture of Computing Systems. Springer
         International Publishing, 2016.
+    * This repository is not aligned with the latest version of gem5, and
+      contains a clone of the development repository on 2014/10.
     
 1) SMC:
     Smart Memory Cube (SMC) is a fully backward compatible and modular 
@@ -137,7 +140,7 @@
          ./scenarios/0-demo/1-singlepim-pagerank.sh -o
           This time, no debugging messages will be displayed and statistics 
           are meaningful.
-          The source code for the page-rank algorithm is available in:
+        * The source code for the page-rank algorithm is available in:
           ./SW/PIM/kernels/sgraph_page_rank.c 
 
     ----------------------- AN INTERACTIVE SCENARIO---------------------------
@@ -162,18 +165,28 @@
       Teenage Follower (ATF) kernel on a graph:
       ./scenarios/a-gem5/f-sgraph/a-teenage/1-kernel.sh 7 -b
     * You can write your own scenario and modify hardware/firmware/software
-      parameters.
+      parameters for it.
       All available parameters are defined in SMC/UTILS/default_params.sh
+    * Each scenario will automatically create a directory inside the SMC-WORK/
+      and store its logs and statistics to it. The name of this directory 
+      corresponds with the initial characters in the scenario name.
+      For example:
+      ./scenarios/(a)-gem5/(f)-sgraph/(a)-teenage/(1)-kernel.sh (7) -b
+      Creates:
+      SMC-WORK/afa17/
 
 4) ADDITIONAL DOCUMENTS:
     In order to understand the environment better, you can consult the 
     following documents:
         SMC/DOC/azarkhish-arcs16-160404.pdf
             Slides for the published article in IEEE ARCS 2016 conference [3]:
+
         SMC/DOC/smc-scripts.pdf
             An overview of the simulation scripts:
+
         SMC/DOC/smc-techreport2.pdf   [not 100% aligned with this release]
             Technical Report (A Full-System Simulation Environment for the
+
             Smart Memory Cube)
         SMC/DOC/smc-techreport2.pdf   [not 100% aligned with this release]
             Technical Report (Design and Exploration of a Processing-in-Memory
