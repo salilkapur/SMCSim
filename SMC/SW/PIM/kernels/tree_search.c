@@ -100,7 +100,7 @@
             while (curr)
             {
                 DMA_REQUEST(curr, &PIM_VREG[0], 3*sizeof(ulong_t), PIM_DMA_READ, DMA_RES0 );
-                __asm__("wfi");
+                DMA_WAIT( DMA_RES0);
                 curr = (node*) &PIM_VREG[0];
                 checksum++;
                 key = curr-> key;
