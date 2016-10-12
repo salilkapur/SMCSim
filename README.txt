@@ -190,7 +190,7 @@
             Technical Report (A Full-System Simulation Environment for the
 
             Smart Memory Cube)
-        SMC/DOC/smc-techreport2.pdf   [not 100% aligned with this release]
+        SMC/DOC/smc-techreport3.pdf   [not 100% aligned with this release]
             Technical Report (Design and Exploration of a Processing-in-Memory
             Architecture for the Smart Memory Cube)
 
