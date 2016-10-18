@@ -625,7 +625,6 @@ function print_versions()
 	echo "	$(make --version | grep -m 1 Make 2>&1 )"
 	echo "	$(readelf --version | grep readelf 2>&1 )"
 	echo "	scons$(scons --version | grep -m 1 engine 2>&1 )"
-    #echo "  python-jinja2$(apt-cache policy python-jinja2 | grep Installed)"
 }
 
 #######################################################################################

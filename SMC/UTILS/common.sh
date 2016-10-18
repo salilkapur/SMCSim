@@ -667,17 +667,6 @@ function check_disk_images()
 # Check external tools
 function check_external_tools
 {
-# 	if [ -d $GEM5_BUILD_DIR/mcpat ]; then
-# 		print_msg "McPAT: $GEM5_BUILD_DIR/mcpat"
-# 	else
-# 		cp -r $GEM5_BASE_DIR/ext/mcpat $GEM5_BUILD_DIR/
-# 		print_msg "Building McPAT ..."
-# 		_PWD=${PWD}
-# 		cd $GEM5_BUILD_DIR/mcpat
-# 		make
-# 		returntopwd
-# 	fi
-
     if [ -d $GEM5_BUILD_DIR/$CACTI ]; then
         print_msg "CACTI: $GEM5_BUILD_DIR/$CACTI (For automatic rebuild, remove this directory)"
     else
@@ -696,9 +685,7 @@ function calculate_power_consumption
 {
     _PWD=${PWD}
     cd $M5_OUTDIR
-    touch empty.txt
-     $GEM5_UTILS_DIR/gem5-mcpat/gem5-mcpat show-text config.json empty.txt > params.txt        # Convert parameters to text format
-    rm empty.txt
+    python $GEM5_UTILS_DIR/python/jsonparser/jsonparser.py config.json > params.txt
     
     call_cacti
     calculate_power_for_timestamp 6 pim
@@ -882,29 +869,6 @@ function calculate_cpu_power
     fi
     #>&2 echo "$1 $2 $3 voltage=$vdd idle_fraction=$f  power=$pwr"
     echo $pwr
-}
-
-#######################################################################################
-# McPAT 
-function call_mcpat
-{
-    echo "Removed"
-# # Remove timestamp from the stats file
-#     set +e
-# #     for i in 1 2 3 4 5 6
-# #     do
-#         echo "---------- Begin Simulation Statistics ----------" > stats_timestamp$1.txt
-#         grep timestamp$1 stats_gem5.txt >> stats_timestamp$1.txt
-#         echo "---------- End Simulation Statistics   ----------" >> stats_timestamp$1.txt
-#         cmd="perl -pi -e 's/timestamp$1.//g' stats_timestamp$1.txt"
-#         eval $cmd
-# #     done
-#     set -e
-#     # Power consumption for the host processors (timestamp6)
-#     $GEM5_UTILS_DIR/gem5-mcpat/gem5-mcpat show-text config.json stats_timestamp$1.txt > params.txt        # For debugging only
-#     $GEM5_UTILS_DIR/gem5-mcpat/gem5-mcpat generate config.json stats_timestamp$1.txt arm_cortex_a9.xml --set-variable cores_name=system.cpu > mcpat.xml
-#     # Run McPAT
-#     $GEM5_BUILD_DIR/mcpat/mcpat -infile mcpat.xml -print_level 5
 }
 
 #######################################################################################
