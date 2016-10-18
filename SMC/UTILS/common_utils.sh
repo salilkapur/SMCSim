@@ -132,6 +132,10 @@ __EOF
 #  --no-output : just generate the results and do not plot them
 function plot_bar_chart()
 {
+if ! [ -z $__NO_GNUPLOTS ]; then
+    return
+fi
+
 if [[ $* == *--no-output* ]]; then
 	_NO_OUTPUT="TRUE"
 fi
