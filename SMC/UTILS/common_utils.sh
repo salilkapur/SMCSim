@@ -77,6 +77,9 @@ function print_war()
 #  $4: ylabel
 function plot()
 {
+if ! [ -z $__NO_GNUPLOTS ]; then
+    return
+fi
 gnuplot --persist <<__EOF
 set title "$2"
 set xlabel "$3"
@@ -203,6 +206,9 @@ function zpad_float()
 # Plot a 2D surface (heat map)
 function surface_plot()
 {
+if ! [ -z $__NO_GNUPLOTS ]; then
+    return
+fi
 _PWD=${PWD}
 __PLOT_TITLE=$3
 cd $1
@@ -279,15 +285,13 @@ cd $PARENT_DIR
 # $3 = Plot 2
 # $4 = Plot 3
 # $5 = Plot 4
-# $6 = Plot 4
-# $7 = Plot 4
+# $6 = Plot 5
+# $7 = Plot 6
 function multiple_plot()
 {
-
-echo $1 
-echo $2
-echo $3 
-echo $4
+if ! [ -z $__NO_GNUPLOTS ]; then
+    return
+fi
 
 PARENT_DIR=${PWD}
 cd $1/
