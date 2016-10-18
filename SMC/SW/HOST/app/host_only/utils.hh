@@ -2,54 +2,6 @@
 //##############################################################################
 #ifdef sgraph_bfs
 
-    unsigned long* queue;    // queue for BFS search
-    unsigned long  head, tail, elements;
-
-    void reset_graph_stats()
-    {
-        for ( unsigned long i=1; i< NODES; i++ )
-        {
-            nodes[i].distance = NC;
-        }
-        nodes[0].distance = 0;       // node[0] is the starting node
-        queue_init;                  // Initialize queue
-    }
-
-    void print_graph()
-    {
-        for ( unsigned long i=0; i<NODES; i++ )
-            cout << "Node: " << i << " Distance:" << nodes[i].distance << endl;
-    }
-
-    unsigned long run_golden()
-    {
-        // cout << "Visited 0 with distance 0" << endl;
-        unsigned long total_distance = 0;
-
-        for (int x=0; x<BFS_MAX_ITERATIONS; x++)
-        {
-            nodes[x].distance = 0;       // node[0] is the starting node
-            queue_init;                  // Initialize queue
-            queue_push(&nodes[x]);               // Push the first element
-            while ( !(queue_empty) )
-            {
-                node* v = (node*)queue_top;
-                queue_pop;
-                for ( unsigned long c=0; c<v->out_degree ; c++ )
-                {
-                    node*succ = v->successors[c];
-                    if (succ->distance == NC) // Infinite
-                    {
-                        succ->distance = v->distance + 1;
-                        total_distance += succ->distance;
-                        // cout << "Visited " << succ->ID << " with distance " << succ->distance << endl;
-                        queue_push(succ);
-                    }
-                }
-            }
-        }
-        return total_distance;
-    }
 
 #endif
 //##############################################################################

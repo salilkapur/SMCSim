@@ -5,7 +5,7 @@ GEM5_STATISTICS=(
 "sim_ticks.host"
 )
 
-VALUES0=( sgraph_page_rank ) #sgraph_teenage_follower )
+VALUES0=( sgraph_bfs ) #sgraph_page_rank ) #sgraph_teenage_follower )
 
 for V0 in ${VALUES0[*]}
 do
