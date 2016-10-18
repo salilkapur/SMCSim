@@ -5,7 +5,7 @@ GEM5_STATISTICS=(
 "sim_ticks.host"
 )
 
-VALUES0=( best ) #default dma1 dma2 dma3 )
+VALUES0=( sgraph_page_rank ) #sgraph_teenage_follower )
 
 for V0 in ${VALUES0[*]}
 do
@@ -17,7 +17,7 @@ do
 	load_model system/gem5_fullsystem_arm$1.sh
 	load_model gem5_perf_sim.sh				# Fast simulation without debugging
 	
-    export OFFLOADED_KERNEL_NAME=sgraph_teenage_follower    # Kernel name to offload (Look in SMC/SW/PIM/kernels)
+    export OFFLOADED_KERNEL_NAME=$V0    # Kernel name to offload (Look in SMC/SW/PIM/kernels)
     
 	source ./smc.sh -u $*	# Update these variables in the simulation environment
 	load_model gem5_automated_sim.sh homo		# Automated simulation

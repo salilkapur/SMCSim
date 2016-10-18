@@ -5,27 +5,28 @@
 #include <cstring>
 #include <iomanip>
 #include <stdlib.h>
+#include <math.h>
 using namespace std;
 
 #define sgraph_teenage_follower
 #define NODES 10000
 #define MAX_OUTDEGREE 10
 #define step 1
+#define PAGERANK_MAX_ITERATIONS 100
+#define PAGERANK_MAX_ERROR 0.001
 
 /****************************************************************************/
 
 typedef struct Node
 {
-    /* Average Teenage Follower */
-    bool teenager;
-    unsigned long followers;
+    float page_rank;
+    float next_rank;
 
     /* General parameters */
     unsigned long       ID;                 // ID of the current node
     unsigned long       out_degree;         // Number of successor nodes
     struct Node** successors;         // List of successors nodes
 } node;
-
 /****************************************************************************/
 
 node* nodes;                 // Graph nodes
@@ -34,38 +35,53 @@ node**  successors_list;     // List of the successors (not used directly)
 
 /****************************************************************************/
 
-void reset_graph_stats()
-{
-    for ( unsigned long i=0; i< NODES; i++ )
+    void reset_graph_stats()
     {
-        nodes[i].followers = 0;
+        for ( unsigned long i=0; i< NODES; i++ )
+        {
+            nodes[i].page_rank = 0;
+            nodes[i].next_rank = 0;
+        }
     }
-}
 
-void print_graph()
-{
-    for ( unsigned long i=0; i<NODES; i++ )
-        cout << "Node: " << i << " Teenager:" << nodes[i].teenager << " Followers: " << nodes[i].followers << endl;
-}
-
-unsigned long run_golden()
-{
-    for ( unsigned long r=0; r<NODES; r++ )
+    void print_graph()
     {
-        if ( nodes[r].teenager )
-            for ( unsigned long c=0; c<nodes[r].out_degree ; c++ )
+        for ( unsigned long i=0; i<NODES; i++ )
+            cout << "Node: " << i << " OutDegree:" << nodes[i].out_degree << " PageRank:" << nodes[i].page_rank << " NextRank: " << nodes[i].next_rank << endl;
+    }
+
+    unsigned long run_golden()
+    {
+        for ( unsigned long i=0; i<NODES; i++ )
+        {
+            nodes[i].page_rank = 1.0 / NODES;
+            nodes[i].next_rank = 0.15 / NODES;
+        }
+        unsigned long count = 0;
+        float diff = 0.0;
+        do {
+            for ( unsigned long i=0; i<NODES; i++ )
             {
-                node*succ = nodes[r].successors[c];
-                succ->followers++;
+                float delta = 0.85 * nodes[i].page_rank / nodes[i].out_degree;
+                for ( unsigned long j=0; j<nodes[i].out_degree; j++ ) // for node.successors
+                        nodes[i].successors[j]->next_rank += delta;
             }
+            diff = 0.0;
+            for ( unsigned long i=0; i<NODES; i++ )
+            {
+                diff += fabsf(nodes[i].next_rank - nodes[i].page_rank);
+                nodes[i].page_rank = nodes[i].next_rank;
+                nodes[i].next_rank = 0.15 / NODES;
+            }
+            cout << "ITERATION: " << count << " ERROR: " << diff << endl;
+            //print_graph();
+        } while (++count < PAGERANK_MAX_ITERATIONS && diff > PAGERANK_MAX_ERROR);
+
+        return (unsigned long)(diff * 1000000.0); // Convert error to fixed point integer
     }
-    unsigned long total_followers = 0;
-    for ( unsigned long r=0; r<NODES; r++ )
-        total_followers += nodes[r].followers;
-    return total_followers;
-}
 
 /****************************************************************************/
+
 
 void create_graph()
 {
@@ -73,6 +89,9 @@ void create_graph()
     // Later, we should read the graph from data sets
     nodes = (node*)malloc(NODES*sizeof(node));
     assert (nodes);
+    #ifdef sgraph_bfs
+    queue = (unsigned long*)malloc(NODES*sizeof(ulong));
+    #endif
     successors_size = 0;
     successors_list = NULL;
 
@@ -106,9 +125,6 @@ void create_graph()
             /* we have found a new successor which we are not already connected to */
             nodes[i].successors[j] = &nodes[succ];
         }
-
-        // Kernel specific initializations
-        nodes[i].teenager = (rand()%2)?true:false;
     }
 
     successors_list = nodes[0].successors;
