@@ -1,12 +1,40 @@
-//##############################################################################
-//##############################################################################
-#ifdef sgraph_bfs
+#include <assert.h>
+#include <unistd.h>
+#include <iostream>
+#include <unistd.h>
+#include <cstring>
+#include <iomanip>
+#include <stdlib.h>
+#include <math.h>
+using namespace std;
 
+#define NODES 10000
+#define MAX_OUTDEGREE 10
+#define step 1
+#define MAX_WEIGHT 10
 
-#endif
-//##############################################################################
-//##############################################################################
-#ifdef sgraph_bellman_ford
+/****************************************************************************/
+#define NC   ((unsigned long)(-1))
+
+typedef struct Node
+{
+    /* Bellman-ford */
+    unsigned long distance;
+    unsigned long*  weights;            // List of weights (weighted graph)
+
+    /* General parameters */
+    unsigned long       ID;                 // ID of the current node
+    unsigned long       out_degree;         // Number of successor nodes
+    struct Node** successors;         // List of successors nodes
+} node;
+
+/****************************************************************************/
+
+node* nodes;                 // Graph nodes
+unsigned long successors_size;     // Size of the successors list
+node**  successors_list;     // List of the successors (not used directly)
+
+/****************************************************************************/
 
     unsigned long  weights_size;     // Size of the weights list
     unsigned long* weights_list;     // List of the weights (not used directly)
@@ -51,11 +79,8 @@
         return checksum;
     }
 
-#endif
-//##############################################################################
-//##############################################################################
-//##############################################################################
-//##############################################################################
+/****************************************************************************/
+
 
 void create_graph()
 {
@@ -63,9 +88,6 @@ void create_graph()
     // Later, we should read the graph from data sets
     nodes = (node*)malloc(NODES*sizeof(node));
     assert (nodes);
-    #ifdef sgraph_bfs
-    queue = (unsigned long*)malloc(NODES*sizeof(ulong));
-    #endif
     successors_size = 0;
     successors_list = NULL;
 
@@ -106,7 +128,6 @@ void create_graph()
         #endif
     }
 
-    #ifdef sgraph_bellman_ford
     cout << " Initializing weights_list for the weighted graph ..." << endl;
     weights_size = 0;
     weights_list = NULL;
@@ -127,8 +148,20 @@ void create_graph()
     }
     
     weights_list = nodes[0].weights;
-    #endif
 
     successors_list = nodes[0].successors;
     reset_graph_stats();
 }
+
+/************************************************/
+// Main
+int main(int argc, char *argv[])
+{
+    cout << "(main.cpp): Create the graph with " << NODES << " nodes ..." << endl;
+    create_graph();
+    cout << "(main.cpp): Running the golden model ... " << endl;
+    unsigned long retval = run_golden();
+    cout << " Golden model returned: " << retval << endl;
+    return 0;
+}
+

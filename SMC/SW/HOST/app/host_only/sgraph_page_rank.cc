@@ -8,7 +8,6 @@
 #include <math.h>
 using namespace std;
 
-#define sgraph_teenage_follower
 #define NODES 10000
 #define MAX_OUTDEGREE 10
 #define step 1
