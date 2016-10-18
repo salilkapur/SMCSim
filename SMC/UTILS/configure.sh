@@ -117,5 +117,4 @@ if ! [ -z $USER_INPUT ] && [ $USER_INPUT == "n" ]; then
     exit
 fi
 
-export CONTINUE_SIMULATION=TRUE
 ./scenarios/0-demo/1-singlepim-pagerank.sh -b
