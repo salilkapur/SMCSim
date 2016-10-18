@@ -1,32 +1,35 @@
 #include <assert.h>
 #include <unistd.h>
-#include <iostream>
-#include <unistd.h>
-#include <cstring>
-#include <iomanip>
 #include <stdlib.h>
-#include <math.h>
-using namespace std;
+#include <stdio.h>
 
 #define NODES 10000
 #define MAX_OUTDEGREE 10
 #define step 1
-#define MAX_WEIGHT 10
+#define BFS_MAX_ITERATIONS 10
 
 /****************************************************************************/
-#define NC   ((unsigned long)(-1))
 
 typedef struct Node
 {
-    /* Bellman-ford */
+    /* BFS */
     unsigned long distance;
-    unsigned long*  weights;            // List of weights (weighted graph)
 
     /* General parameters */
     unsigned long       ID;                 // ID of the current node
     unsigned long       out_degree;         // Number of successor nodes
     struct Node** successors;         // List of successors nodes
 } node;
+
+// queue operations (used for BFS algorithm)
+#define queue_init     { head=0; tail=0; elements=0; }
+#define queue_push(X)  { queue[head]=(unsigned long)X;  head++;  if (head>=NODES) head=0; elements++; }
+#define queue_pop      { tail++; if (tail>=NODES) tail=0;  elements--; } 
+#define queue_top      ( queue[tail] )
+#define queue_empty    ( elements==0 )
+#define queue_full     ( elements==(NODES-1) )
+
+#define NC   ((unsigned long)(-1))
 
 /****************************************************************************/
 
@@ -35,49 +38,49 @@ unsigned long successors_size;     // Size of the successors list
 node**  successors_list;     // List of the successors (not used directly)
 
 /****************************************************************************/
-
-    unsigned long  weights_size;     // Size of the weights list
-    unsigned long* weights_list;     // List of the weights (not used directly)
+    unsigned long* queue;    // queue for BFS search
+    unsigned long  head, tail, elements;
 
     void reset_graph_stats()
     {
         for ( unsigned long i=1; i< NODES; i++ )
         {
-            nodes[i].distance = NC; // Infinity
+            nodes[i].distance = NC;
         }
         nodes[0].distance = 0;       // node[0] is the starting node
-    }
-
-    void print_graph()
-    {
-        for ( unsigned long i=0; i<NODES; i++ )
-            cout << "Node: " << i << " Distance:" << nodes[i].distance << endl;
-        for ( unsigned long r=0; r<NODES; r++ )
-        {
-            cout << "Node " << r << ".weights: [ ";
-            for ( unsigned long c=0; c< nodes[r].out_degree; c++ )
-            {
-                cout << nodes[r].weights[c] << " ";
-            }
-            cout << "]" << endl;
-        }        
+        queue_init;                  // Initialize queue
     }
 
     unsigned long run_golden()
     {
-        unsigned long checksum = 0;
-        for ( unsigned r=0; r<NODES; r++ )
-            for ( unsigned long c=0; c<nodes[r].out_degree; c++ ) // for node.successors
+        // cout << "Visited 0 with distance 0" << endl;
+        unsigned long total_distance = 0;
+
+        for (int x=0; x<BFS_MAX_ITERATIONS; x++)
+        {
+            nodes[x].distance = 0;       // node[0] is the starting node
+            queue_init;                  // Initialize queue
+            queue_push(&nodes[x]);               // Push the first element
+            while ( !(queue_empty) )
             {
-                node*u = &nodes[r];
-                node*v = nodes[r].successors[c];
-                unsigned long w = nodes[r].weights[c];
-                if ( u->distance != NC && v->distance > u->distance + w )
-                    v->distance = u->distance + w;
-                checksum += w;
+                node* v = (node*)queue_top;
+                queue_pop;
+                for ( unsigned long c=0; c<v->out_degree ; c++ )
+                {
+                    node*succ = v->successors[c];
+                    if (succ->distance == NC) // Infinite
+                    {
+                        succ->distance = v->distance + 1;
+                        total_distance += succ->distance;
+                        // cout << "Visited " << succ->ID << " with distance " << succ->distance << endl;
+                        queue_push(succ);
+                    }
+                }
             }
-        return checksum;
+        }
+        return total_distance;
     }
+
 
 /****************************************************************************/
 
@@ -88,6 +91,7 @@ void create_graph()
     // Later, we should read the graph from data sets
     nodes = (node*)malloc(NODES*sizeof(node));
     assert (nodes);
+    queue = (unsigned long*)malloc(NODES*sizeof(unsigned long));
     successors_size = 0;
     successors_list = NULL;
 
@@ -122,46 +126,22 @@ void create_graph()
             nodes[i].successors[j] = &nodes[succ];
         }
 
-        // Kernel specific initializations
-        #ifdef sgraph_teenage_follower
-        nodes[i].teenager = (rand()%2)?true:false;
-        #endif
     }
-
-    cout << " Initializing weights_list for the weighted graph ..." << endl;
-    weights_size = 0;
-    weights_list = NULL;
-
-    for ( unsigned long i=0; i<NODES; i++ )
-    {
-        unsigned long d = nodes[i].out_degree;
-        if ( d == 0 )
-            nodes[i].weights = NULL;
-        else
-        {
-            nodes[i].weights = (unsigned long*)malloc(d*sizeof(unsigned long));
-            assert (nodes[i].weights);
-            weights_size += d*sizeof(unsigned long);
-        }
-        for ( unsigned long j=0; j<d; j++)
-            nodes[i].weights[j] = rand()%MAX_WEIGHT + 1;
-    }
-    
-    weights_list = nodes[0].weights;
 
     successors_list = nodes[0].successors;
     reset_graph_stats();
 }
 
+
 /************************************************/
 // Main
 int main(int argc, char *argv[])
 {
-    cout << "(main.cpp): Create the graph with " << NODES << " nodes ..." << endl;
+    printf("(main.cpp): Create the graph with %d nodes\n", NODES);
     create_graph();
-    cout << "(main.cpp): Running the golden model ... " << endl;
+    printf("(main.cpp): Running the golden model ... \n");
     unsigned long retval = run_golden();
-    cout << " Golden model returned: " << retval << endl;
+    printf(" Golden model returned: %ld\n", retval);
     return 0;
 }
 

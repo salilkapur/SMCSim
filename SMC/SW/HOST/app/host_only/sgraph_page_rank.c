@@ -1,12 +1,8 @@
 #include <assert.h>
 #include <unistd.h>
-#include <iostream>
-#include <unistd.h>
-#include <cstring>
-#include <iomanip>
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
-using namespace std;
 
 #define NODES 10000
 #define MAX_OUTDEGREE 10
@@ -43,12 +39,6 @@ node**  successors_list;     // List of the successors (not used directly)
         }
     }
 
-    void print_graph()
-    {
-        for ( unsigned long i=0; i<NODES; i++ )
-            cout << "Node: " << i << " OutDegree:" << nodes[i].out_degree << " PageRank:" << nodes[i].page_rank << " NextRank: " << nodes[i].next_rank << endl;
-    }
-
     unsigned long run_golden()
     {
         for ( unsigned long i=0; i<NODES; i++ )
@@ -72,7 +62,7 @@ node**  successors_list;     // List of the successors (not used directly)
                 nodes[i].page_rank = nodes[i].next_rank;
                 nodes[i].next_rank = 0.15 / NODES;
             }
-            cout << "ITERATION: " << count << " ERROR: " << diff << endl;
+            printf( "ITERATION: %ld   ERROR: %f\n", count, diff);
             //print_graph();
         } while (++count < PAGERANK_MAX_ITERATIONS && diff > PAGERANK_MAX_ERROR);
 
@@ -134,11 +124,11 @@ void create_graph()
 // Main
 int main(int argc, char *argv[])
 {
-    cout << "(main.cpp): Create the graph with " << NODES << " nodes ..." << endl;
+    printf("(main.cpp): Create the graph with %d nodes\n", NODES);
     create_graph();
-    cout << "(main.cpp): Running the golden model ... " << endl;
+    printf("(main.cpp): Running the golden model ... \n");
     unsigned long retval = run_golden();
-    cout << " Golden model returned: " << retval << endl;
+    printf(" Golden model returned: %ld\n", retval);
     return 0;
 }
 
