@@ -6,7 +6,7 @@ GEM5_STATISTICS=(
 "sim_ticks.host"
 )
 
-VALUES0=( "TRUE" "FALSE" ) # Host side or not
+VALUES0=( 64 128 256 512 ) # "no_dma" )
 
 for V0 in ${VALUES0[*]}
 do
@@ -19,17 +19,13 @@ do
 	load_model system/gem5_pim.sh
 	load_model gem5_perf_sim.sh				# Fast simulation without debugging
 
-	
-	
 	#####################
 	#####################
 	export OFFLOADED_KERNEL_NAME=matrix_add	# Kernel name to offload (Look in SMC/SW/PIM/kernels)
-	export OFFLOADED_KERNEL_SUBNAME=dma
-	
-	export MOVE_PIM_TO_HOST=$V0
-	export PIM_CLOCK_FREQUENCY_GHz=4
+	export OFFLOADED_KERNEL_SUBNAME=best
 	export OFFLOADED_MATRIX_SIZE=1024
-	
+	export PIM_DMA_XFER_SIZE=$V0
+	export PIM_CLOCK_FREQUENCY_GHz=4
 	#####################
 	#####################
 	
@@ -38,7 +34,7 @@ do
 
 
 	source ./smc.sh -u $*	# Update these variables in the simulation environment
-	load_model gem5_automated_sim.sh hetero		# Automated simulation
+	load_model gem5_automated_sim.sh homo		# Automated simulation
 	
 
 	####################################
@@ -92,4 +88,4 @@ done
 	
 finalize_gem5_simulation
 
-print_msg "This is a host side accelerator for comparison with our PIM"
+print_msg "Done!"

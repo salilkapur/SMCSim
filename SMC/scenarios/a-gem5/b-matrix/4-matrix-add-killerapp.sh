@@ -24,7 +24,7 @@ do
 	#####################
 	#####################
 	export OFFLOADED_KERNEL_NAME=matrix_add #matrix_add_dma
-	export OFFLOADED_KERNEL_SUBNAME=dma
+	export OFFLOADED_KERNEL_SUBNAME=best
 	export MOVE_PIM_TO_HOST=$V0
 	export PIM_CLOCK_FREQUENCY_GHz=4
 	export OFFLOADED_MATRIX_SIZE=1024
