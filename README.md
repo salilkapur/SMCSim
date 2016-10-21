@@ -184,15 +184,16 @@ In order to understand the environment better, you can consult the following doc
 * [ARCS2016-Slides](SMC/DOC/azarkhish-arcs16-160404.pdf)
   * Slides for the published article in IEEE ARCS 2016 conference [3]:
 
-* SMC/DOC/smc-scripts.pdf
+* [SMC-Scripts](SMC/DOC/smc-scripts.pdf)
   * An overview of the simulation scripts:
 
-* SMC/DOC/smc-techreport2.pdf   [not 100% aligned with this release]
+* [SMC-TechReport](SMC/DOC/smc-techreport2.pdf)
   * Technical Report (A Full-System Simulation Environment for the Smart Memory Cube)
+  * (Not completely aligned with this release)
 
-* SMC/DOC/smc-techreport3.pdf   [not 100% aligned with this release]
-  * Technical Report (Design and Exploration of a Processing-in-Memory
-  * Architecture for the Smart Memory Cube)
+* [SMC-TechReport](SMC/DOC/SMC/DOC/smc-techreport3.pdf)
+  * Technical Report (Design and Exploration of a Processing-in-Memory Architecture for the Smart Memory Cube)
+  * (Not completely aligned with this release)
 
 ## REFERENCES:
 1. http://gem5.org/
