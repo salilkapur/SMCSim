@@ -10,33 +10,33 @@ some of them have been modified and extended to model other functionalities
 
 ![Alt text](SMC/DOC/smcsim-small.png?raw=true "SMCSim")
 
-    * In order to build and run this environment, please refer to SECTION 3.
-    * In order to better understand the simulation enviornment, please refer 
-      to SECTION 4.
-    * If you have any questions regarding this environment please send an
-      email to [erfan <dot> azarkhish <at> unibo <dot> it]
-    * If you plan to use SMCSim, please acknowledge gem5 and also cite the
-      following publication:
-        Azarkhish, Erfan, et al. "Design and Evaluation of a Processing-in-
-        Memory Architecture for the Smart Memory Cube." International 
-        Conference on Architecture of Computing Systems. Springer
-        International Publishing, 2016.
-    * This repository is not aligned with the latest version of gem5, and
-      contains a clone of the development repository on 2014/10.
+* In order to build and run this environment, please refer to SECTION 3.
+* In order to better understand the simulation enviornment, please refer 
+  to SECTION 4.
+* If you have any questions regarding this environment please send an
+  email to [erfan <dot> azarkhish <at> unibo <dot> it]
+* If you plan to use SMCSim, please acknowledge gem5 and also cite the
+  following publication:
+    Azarkhish, Erfan, et al. "Design and Evaluation of a Processing-in-
+    Memory Architecture for the Smart Memory Cube." International 
+    Conference on Architecture of Computing Systems. Springer
+    International Publishing, 2016.
+* This repository is not aligned with the latest version of gem5, and
+  contains a clone of the development repository on 2014/10.
     
 ## 2. SMC:
-    Smart Memory Cube (SMC) is a fully backward compatible and modular 
-    extension to the standard HMC [6], supporting near memory computation on 
-    its Logic Base (LoB) through a high performance interconnect designed for 
-    this purpose. Cycle-accurate design and analysis of the SMC have been 
-    previously published in [4,5], while this package provides a high-level 
-    full-system simulation environment for it.
+Smart Memory Cube (SMC) is a fully backward compatible and modular 
+extension to the standard HMC [6], supporting near memory computation on 
+its Logic Base (LoB) through a high performance interconnect designed for 
+this purpose. Cycle-accurate design and analysis of the SMC have been 
+previously published in [4,5], while this package provides a high-level 
+full-system simulation environment for it.
     
 ## 3. BUILD AND FIRST RUN:
-    Assuming that you have cloned the following repository, you can start with
-    the configurtion and build procedure:
-        git@iis-git.ee.ethz.ch:erfan.azarkhish/SMCSim.git
-        https://iis-git.ee.ethz.ch/erfan.azarkhish/SMCSim
+Assuming that you have cloned the following repository, you can start with
+the configurtion and build procedure:
+* git@iis-git.ee.ethz.ch:erfan.azarkhish/SMCSim.git
+* https://iis-git.ee.ethz.ch/erfan.azarkhish/SMCSim
 
     -------------------------- BUILD PROCEDURE -------------------------------
     * Move to the base directory where README.txt is located.
