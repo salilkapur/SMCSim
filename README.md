@@ -38,34 +38,35 @@ the configurtion and build procedure:
 * git@iis-git.ee.ethz.ch:erfan.azarkhish/SMCSim.git
 * https://iis-git.ee.ethz.ch/erfan.azarkhish/SMCSim
 
-    -------------------------- BUILD PROCEDURE -------------------------------
-    * Move to the base directory where README.txt is located.
-        cd SMSim/
+### BUILD PROCEDURE
 
-    * Extract the work directory here:
-        tar xvfz SMC-WORK.tgz > /dev/null
+* Move to the base directory where README.txt is located.
+ * cd SMSim/
 
-    * Configuration and Build:
-        cd SMC/
-        ./smc.sh --config
+* Extract the work directory here:
+ * tar xvfz SMC-WORK.tgz > /dev/null
 
-    * You will be prompted before building the kernels
+* Configuration and Build:
+ * cd SMC/
+ * ./smc.sh --config
 
-    * Please make the following checks before continuing:
-        - Required tools are already installed and "[   OK  ]" is displayed.
-        - Required libraries are all installed (specially protobuf)
-        - Required versions match the available versions
-        - We recommend using using Ubuntu 14.04.4 LTS. All dependencies can be
-          installed using apt-get.
+* You will be prompted before building the kernels
 
-    * "... Do you want to build the kernels now? (Y/n)"
-        Press ENTER (This will build the kernels)
+* Please make the following checks before continuing:
+ * Required tools are already installed and "[   OK  ]" is displayed.
+ * Required libraries are all installed (specially protobuf)
+ * Required versions match the available versions
+ * We recommend using using Ubuntu 14.04.4 LTS. All dependencies can be
+      installed using apt-get.
 
-    * "... Do you want to build gem5 (demo scenario) now? (Y/n)"
-        Press ENTER (This will build gem5 and based on a demo scenario)
+* "... Do you want to build the kernels now? (Y/n)"
+ * Press ENTER (This will build the kernels)
 
-    * You should see the following message:
-        "ARM/gem5.opt was built successfully"
+* "... Do you want to build gem5 (demo scenario) now? (Y/n)"
+ * Press ENTER (This will build gem5 and based on a demo scenario)
+
+* You should see the following message:
+ * "ARM/gem5.opt was built successfully"
 
     ----------------------- RUNNING A DEMO SCENARIO---------------------------
     * Now you can run the demo simulation:
