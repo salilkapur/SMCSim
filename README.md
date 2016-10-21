@@ -102,8 +102,8 @@ the configurtion and build procedure:
   This time, you should see the following messages in the telnet terminal:
   (Offloading and execution of the PageRank algorithm)
     
-    ##############JOB START#################
-    >>>> Install the driver
+    ```##############JOB START#################```
+    ```>>>> Install the driver```
     ...
     >>>> Run the application and offload the kernel ...
     [PIM.API]: Offloading kernel: sgraph_page_rank.hex
