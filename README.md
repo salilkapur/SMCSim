@@ -1,12 +1,12 @@
 ## 1. SMCSim:
 SMCSim is a high-level simulation environment developed based on gem5 [1],
-    capable of modeling an SMC device attached to a complete host System on
-    Chip. The General Memory System [2] of gem5 in full-system simulation mode
-    has been adopted in SMCSim. The key goal in the design of this environment
-    is component reuse. The simulation models are built by connecting the
-    already available components in gem5 (e.g. DMA engine, interconnects, DRAM
-    Controllers), and some of them have been modified and extended to model
-    other functionalities (e.g. serial links).
+capable of modeling an SMC device attached to a complete host System on Chip.
+The General Memory System [2] of gem5 in full-system simulation mode has been
+adopted in SMCSim. The key goal in the design of this environment is component
+reuse. The simulation models are built by connecting the already available
+components in gem5 (e.g. DMA engine, interconnects, DRAM Controllers), and 
+some of them have been modified and extended to model other functionalities
+(e.g. serial links). An overview of SMCSim is illustrated here:
 
 ![Alt text](SMC/DOC/smcsim-small.png?raw=true "SMCSim")
 
