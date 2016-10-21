@@ -181,7 +181,7 @@ ITERATION: 1 ERROR: 0.391594
 ## 4. ADDITIONAL DOCUMENTS:
 In order to understand the environment better, you can consult the following documents:
 
-* SMC/DOC/azarkhish-arcs16-160404.pdf
+* [ARCS2016-Slides](SMC/DOC/azarkhish-arcs16-160404.pdf)
   * Slides for the published article in IEEE ARCS 2016 conference [3]:
 
 * SMC/DOC/smc-scripts.pdf
