@@ -203,3 +203,6 @@ In order to understand the environment better, you can consult the following doc
 4. Azarkhish, Erfan, et al. *Logic-Base Interconnect Design for Near Memory Computing in the Smart Memory Cube.* (2016).
 5. Azarkhish, Erfan, et al. *High performance AXI-4.0 based interconnect for extensible smart memory cubes.* 2015 Design, Automation & Test in Europe Conference & Exhibition (DATE). IEEE, 2015.
 6. http://www.hybridmemorycube.org/
+
+## KEYWORDS:
+Hybrid Memory Cube (HMC), Near Memory Computation, Processor-in-Memory (PIM), Smart Memory Cube (SMC), Full-system-simulation, Software Stack, Device Driver
