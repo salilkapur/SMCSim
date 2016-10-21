@@ -68,39 +68,39 @@ the configurtion and build procedure:
 * You should see the following message:
  * "ARM/gem5.opt was built successfully"
 
-    ----------------------- RUNNING A DEMO SCENARIO---------------------------
-    * Now you can run the demo simulation:
-        ./scenarios/0-demo/1-singlepim-pagerank.sh -o
-        Press ENTER
+### RUNNING A DEMO SCENARIO
+* Now you can run the demo simulation:
+ * ./scenarios/0-demo/1-singlepim-pagerank.sh -o
+ * Press ENTER
 
-    * This scenario contains a single PIM device connected to an ARM host.
-    A device driver for PIM is installed automatically on the embedded Linux.
-    Then the PageRank task is offloaded to PIM and finally, its results are
-    compared with its execution on the host side.
+* This scenario contains a single PIM device connected to an ARM host.
+ A device driver for PIM is installed automatically on the embedded Linux.
+ Then the PageRank task is offloaded to PIM and finally, its results are
+ compared with its execution on the host side.
 
-    * Here are some notes:
-        * Instead of -o switch you can use -h to see the list of the available
-          options. You can also use -b to rebuild gem5.
-        * Inside another terminal you can run "./smc.sh -t" or 
-          "telnet localhost 3456". This way you can attach a terminal to the
-           embedded Linux.
-        * This simulation should finish automatically and print the following 
-          message in the telnet terminal:
-            >>> Checkpointing simulation...
-            >>> Exiting...
+* Here are some notes:
+ * Instead of -o switch you can use -h to see the list of the available
+      options. You can also use -b to rebuild gem5.
+ * Inside another terminal you can run "./smc.sh -t" or 
+      "telnet localhost 3456". This way you can attach a terminal to the
+       embedded Linux.
+ * This simulation should finish automatically and print the following 
+      message in the telnet terminal:
+   * >>> Checkpointing simulation...
+   * >>> Exiting...
 
-    * The first time that you run this simulation scenario, a checkpoint is
-      automatically taken and the simulation exits. While, next times, the 
-      simulation will resume from the checkpoint automatically and jump to the
-      execution of the actual scenario (instead of booting the OS every time).
+* The first time that you run this simulation scenario, a checkpoint is
+  automatically taken and the simulation exits. While, next times, the 
+  simulation will resume from the checkpoint automatically and jump to the
+  execution of the actual scenario (instead of booting the OS every time).
 
-    * So, now please rerun the simulation scenario once again:
-        ./scenarios/0-demo/1-singlepim-pagerank.sh -o
+* So, now please rerun the simulation scenario once again:
+ * ./scenarios/0-demo/1-singlepim-pagerank.sh -o
 
-    * Remember that user must be in sudoers list (to mount the disk images)
-      Again attach the terminal (telnet localhost 3456)
-      This time, you should see the following messages in the telnet terminal:
-      (Offloading and execution of the PageRank algorithm)
+* Remember that user must be in sudoers list (to mount the disk images).
+  Again attach the terminal (telnet localhost 3456). 
+  This time, you should see the following messages in the telnet terminal:
+  (Offloading and execution of the PageRank algorithm)
     
     ##############JOB START#################
     >>>> Install the driver
