@@ -8,6 +8,8 @@
     Controllers), and some of them have been modified and extended to model
     other functionalities (e.g. serial links).
 
+![Alt text](SMC/DOC/smcsim-small.png?raw=true "SMCSim")
+
     * In order to build and run this environment, please refer to SECTION 3.
     * In order to better understand the simulation enviornment, please refer 
       to SECTION 4.
