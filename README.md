@@ -1,5 +1,5 @@
 ## 1. SMCSim:
-    SMCSim is a high-level simulation environment developed based on gem5 [1],
+SMCSim is a high-level simulation environment developed based on gem5 [1],
     capable of modeling an SMC device attached to a complete host System on
     Chip. The General Memory System [2] of gem5 in full-system simulation mode
     has been adopted in SMCSim. The key goal in the design of this environment
@@ -8,7 +8,7 @@
     Controllers), and some of them have been modified and extended to model
     other functionalities (e.g. serial links).
 
-    ![Alt text](SMC/DOC/smcsim-small.png?raw=true "SMCSim")
+![Alt text](SMC/DOC/smcsim-small.png?raw=true "SMCSim")
 
     * In order to build and run this environment, please refer to SECTION 3.
     * In order to better understand the simulation enviornment, please refer 
