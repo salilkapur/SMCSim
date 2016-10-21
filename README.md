@@ -179,32 +179,31 @@ ITERATION: 1 ERROR: 0.391594
   * Creates: SMC-WORK/afa17/
 
 ## 4. ADDITIONAL DOCUMENTS:
-    In order to understand the environment better, you can consult the 
-    following documents:
-        SMC/DOC/azarkhish-arcs16-160404.pdf
-            Slides for the published article in IEEE ARCS 2016 conference [3]:
+In order to understand the environment better, you can consult the following documents:
 
-        SMC/DOC/smc-scripts.pdf
-            An overview of the simulation scripts:
+* SMC/DOC/azarkhish-arcs16-160404.pdf
+  * Slides for the published article in IEEE ARCS 2016 conference [3]:
 
-        SMC/DOC/smc-techreport2.pdf   [not 100% aligned with this release]
-            Technical Report (A Full-System Simulation Environment for the
+* SMC/DOC/smc-scripts.pdf
+  * An overview of the simulation scripts:
 
-            Smart Memory Cube)
-        SMC/DOC/smc-techreport3.pdf   [not 100% aligned with this release]
-            Technical Report (Design and Exploration of a Processing-in-Memory
-            Architecture for the Smart Memory Cube)
+* SMC/DOC/smc-techreport2.pdf   [not 100% aligned with this release]
+  * Technical Report (A Full-System Simulation Environment for the Smart Memory Cube)
+
+* SMC/DOC/smc-techreport3.pdf   [not 100% aligned with this release]
+  * Technical Report (Design and Exploration of a Processing-in-Memory
+  * Architecture for the Smart Memory Cube)
 
 ## REFERENCES:
-    [1] http://gem5.org/
-    [2] http://gem5.org/General_Memory_System
-    [3] Azarkhish, Erfan, et al. "Design and Evaluation of a Processing-in-
-        Memory Architecture for the Smart Memory Cube." International
-        Conference on Architecture of Computing Systems. Springer
-        International Publishing, 2016.
-    [4] Azarkhish, Erfan, et al. "Logic-Base Interconnect Design for Near
-        Memory Computing in the Smart Memory Cube." (2016).
-    [5] Azarkhish, Erfan, et al. "High performance AXI-4.0 based interconnect
-        for extensible smart memory cubes." 2015 Design, Automation & Test in
-        Europe Conference & Exhibition (DATE). IEEE, 2015.
-    [6] http://www.hybridmemorycube.org/
+1. http://gem5.org/
+2. http://gem5.org/General_Memory_System
+3. Azarkhish, Erfan, et al. "Design and Evaluation of a Processing-in-
+   Memory Architecture for the Smart Memory Cube." International
+   Conference on Architecture of Computing Systems. Springer
+   International Publishing, 2016.
+4. Azarkhish, Erfan, et al. "Logic-Base Interconnect Design for Near
+   Memory Computing in the Smart Memory Cube." (2016).
+5. Azarkhish, Erfan, et al. "High performance AXI-4.0 based interconnect
+   for extensible smart memory cubes." 2015 Design, Automation & Test in
+   Europe Conference & Exhibition (DATE). IEEE, 2015.
+6. http://www.hybridmemorycube.org/
