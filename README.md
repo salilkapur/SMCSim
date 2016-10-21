@@ -134,50 +134,49 @@ ITERATION: 1 ERROR: 0.391594
     * To run a performance simulation and gather meaningful statistics you
       should uncomment a single line in the scenario script:
       * vi ./scenarios/0-demo/1-singlepim-pagerank.sh
-      Uncomment this line:
-      #   load_model gem5_perf_sim.sh
-      Now remove the previous checkpoint:
-      ./scenarios/0-demo/1-singlepim-pagerank.sh -r
-      (VERY IMPORTANT: every time a hardware or firmware parameter is 
-      changed the checkpoint must be deleted and retaken):
-      And run the simulation again:
-     ./scenarios/0-demo/1-singlepim-pagerank.sh -o
-      This time, no debugging messages will be displayed and statistics 
+      * Uncomment this line:
+      * # load_model gem5_perf_sim.sh
+      * Now remove the previous checkpoint:
+      * ./scenarios/0-demo/1-singlepim-pagerank.sh -r
+      * (VERY IMPORTANT: every time a hardware or firmware parameter is 
+         changed the checkpoint must be deleted and retaken):
+      * Now, run the simulation again:
+      * ./scenarios/0-demo/1-singlepim-pagerank.sh -o
+      * This time, no debugging messages will be displayed and statistics 
       are meaningful.
-    * The source code for the page-rank algorithm is available in:
-      ./SW/PIM/kernels/sgraph_page_rank.c 
+      * The source code for the page-rank algorithm is available in:
+       * ./SW/PIM/kernels/sgraph_page_rank.c 
 
-    ----------------------- AN INTERACTIVE SCENARIO---------------------------
-    * Run the second demo scenario:    
-        ./scenarios/0-demo/0-singlepim-manual.sh -o
-        (To make sure that gem5's build is final, you can use -b beforehand)
-    * This scenario is exactly similar to the previous one with the difference
-      that it does not automatically run the simulation and terminate.
-      So you will be able to interact with the guest OS and run the simulation
-      manually
-    * Attach a terminal and login with user "root" without any password.
-    * Then run the following commands in the guest OS:
-        cd /
-        ./get
-        cd work
-        ./do
-    * This will run the simulation same as the previous case
+### AN INTERACTIVE SCENARIO
+* Run the second demo scenario:    
+ * ./scenarios/0-demo/0-singlepim-manual.sh -o
+ * (To make sure that gem5's build is final, you can use -b beforehand)
+* This scenario is exactly similar to the previous one with the difference
+  that it does not automatically run the simulation and terminate.
+  So you will be able to interact with the guest OS and run the simulation
+  manually
+* Attach a terminal and login with user "root" without any password.
+* Then run the following commands in the guest OS:
+ * cd /
+ * ./get
+ * cd work
+ * ./do
+* This will run the simulation same as the previous case
 
-    ----------------------- MORE EXPLORATION SCENARIOS -----------------------
-    * You can take a look at SMC/scenarios/ for a list of available scenarios
-    * For example the following scenario asks PIM to execute the Average 
-      Teenage Follower (ATF) kernel on a graph:
-      ./scenarios/a-gem5/f-sgraph/a-teenage/1-kernel.sh 7 -b
-    * You can write your own scenario and modify hardware/firmware/software
-      parameters for it.
-      All available parameters are defined in SMC/UTILS/default_params.sh
-    * Each scenario will automatically create a directory inside the SMC-WORK/
-      and store its logs and statistics to it. The name of this directory 
-      corresponds with the initial characters in the scenario name.
-      For example:
-      ./scenarios/(a)-gem5/(f)-sgraph/(a)-teenage/(1)-kernel.sh (7) -b
-      Creates:
-      SMC-WORK/afa17/
+### MORE EXPLORATION SCENARIOS
+* You can take a look at SMC/scenarios/ for a list of available scenarios
+* For example the following scenario asks PIM to execute the Average 
+  Teenage Follower (ATF) kernel on a graph:
+  * ./scenarios/a-gem5/f-sgraph/a-teenage/1-kernel.sh 7 -b
+* You can write your own scenario and modify hardware/firmware/software
+  parameters for it.
+  All available parameters are defined in SMC/UTILS/default_params.sh
+* Each scenario will automatically create a directory inside the SMC-WORK/
+  and store its logs and statistics to it. The name of this directory 
+  corresponds with the initial characters in the scenario name.
+  For example:
+  * ./scenarios/(a)-gem5/(f)-sgraph/(a)-teenage/(1)-kernel.sh (7) -b
+  * Creates: SMC-WORK/afa17/
 
 ## 4. ADDITIONAL DOCUMENTS:
     In order to understand the environment better, you can consult the 
