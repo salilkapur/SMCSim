@@ -198,8 +198,8 @@ In order to understand the environment better, you can consult the following doc
 ## REFERENCES:
 1. http://gem5.org/
 2. http://gem5.org/General_Memory_System
-3. Azarkhish, Erfan, et al. * Design and Evaluation of a Processing-in-Memory Architecture for the Smart Memory Cube. * International
+3. Azarkhish, Erfan, et al. *Design and Evaluation of a Processing-in-Memory Architecture for the Smart Memory Cube.* International
    Conference on Architecture of Computing Systems. Springer International Publishing, 2016.
-4. Azarkhish, Erfan, et al. * Logic-Base Interconnect Design for Near Memory Computing in the Smart Memory Cube. * (2016).
-5. Azarkhish, Erfan, et al. * High performance AXI-4.0 based interconnect for extensible smart memory cubes. * 2015 Design, Automation & Test in Europe Conference & Exhibition (DATE). IEEE, 2015.
+4. Azarkhish, Erfan, et al. *Logic-Base Interconnect Design for Near Memory Computing in the Smart Memory Cube.* (2016).
+5. Azarkhish, Erfan, et al. *High performance AXI-4.0 based interconnect for extensible smart memory cubes.* 2015 Design, Automation & Test in Europe Conference & Exhibition (DATE). IEEE, 2015.
 6. http://www.hybridmemorycube.org/
