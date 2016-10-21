@@ -102,10 +102,10 @@ the configurtion and build procedure:
   This time, you should see the following messages in the telnet terminal:
   (Offloading and execution of the PageRank algorithm)
     
-    ```##############JOB START#################```
-    ```>>>> Install the driver```
+    ##############JOB START#################
+    Install the driver
     ...
-    >>>> Run the application and offload the kernel ...
+    Run the application and offload the kernel ...
     [PIM.API]: Offloading kernel: sgraph_page_rank.hex
     ...
     [PIM.Driver]: ...
@@ -117,13 +117,11 @@ the configurtion and build procedure:
     ITERATION: 0 ERROR: 0.606051
     ITERATION: 1 ERROR: 0.391594
 
-    * Finally, you should see a happy smiley face in the terminal indicating 
-      that the result from the PIM execution has been equal to the host side
-      execution.
-    Also, some statistics are reported in the main terminal:
-    Stat: {sim_ticks.pim}:  9514336000
-    Stat: {sim_ticks.host}:  21437286000
-    ...
+* Finally, you should see a happy smiley face in the terminal indicating 
+  that the result from the PIM execution has been equal to the host side
+  execution. Also, some statistics are reported in the main terminal:
+ * Stat: {sim_ticks.pim}:  9514336000
+ * Stat: {sim_ticks.host}:  21437286000
 
     * Some notes:
         * You can take a look at the simulation log files in:
