@@ -102,20 +102,22 @@ the configurtion and build procedure:
   This time, you should see the following messages in the telnet terminal:
   (Offloading and execution of the PageRank algorithm)
     
-    ##############JOB START#################
-    Install the driver
-    ...
-    Run the application and offload the kernel ...
-    [PIM.API]: Offloading kernel: sgraph_page_rank.hex
-    ...
-    [PIM.Driver]: ...
-    ...
-    [PIM.API]: STARTING COMPUTATION ...
-    [PIM.API]: PIM_STATUS_REG=B
-    ...
-    (main.cpp): Running the golden model ... 
-    ITERATION: 0 ERROR: 0.606051
-    ITERATION: 1 ERROR: 0.391594
+```
+##############JOB START#################
+Install the driver
+...
+Run the application and offload the kernel ...
+[PIM.API]: Offloading kernel: sgraph_page_rank.hex
+...
+[PIM.Driver]: ...
+...
+[PIM.API]: STARTING COMPUTATION ...
+[PIM.API]: PIM_STATUS_REG=B
+...
+(main.cpp): Running the golden model ... 
+ITERATION: 0 ERROR: 0.606051
+ITERATION: 1 ERROR: 0.391594
+```
 
 * Finally, you should see a happy smiley face in the terminal indicating 
   that the result from the PIM execution has been equal to the host side
@@ -123,28 +125,27 @@ the configurtion and build procedure:
  * Stat: {sim_ticks.pim}:  9514336000
  * Stat: {sim_ticks.host}:  21437286000
 
-    * Some notes:
-        * You can take a look at the simulation log files in:
-          SMC-WORK/scenarios/01/sgraph_page_rank-best-000001000/m5out
-          The visualization of the system is in config.dot.pdf
-          The statistics reported from gem5 are in stats.txt
-        * This scenario has the debugging messages enabled, so the statistics 
-          are not meaningful. 
-        * To run a performance simulation and gather meaningful statistics you
-          should uncomment a single line in the scenario script:
-          vi ./scenarios/0-demo/1-singlepim-pagerank.sh
-          Uncomment this line:
-          #   load_model gem5_perf_sim.sh
-          Now remove the previous checkpoint:
-          ./scenarios/0-demo/1-singlepim-pagerank.sh -r
-          (VERY IMPORTANT: every time a hardware or firmware parameter is 
-          changed the checkpoint must be deleted and retaken):
-          And run the simulation again:
-         ./scenarios/0-demo/1-singlepim-pagerank.sh -o
-          This time, no debugging messages will be displayed and statistics 
-          are meaningful.
-        * The source code for the page-rank algorithm is available in:
-          ./SW/PIM/kernels/sgraph_page_rank.c 
+* Some notes:
+    * You can take a look at the simulation log files in:
+     * SMC-WORK/scenarios/01/sgraph_page_rank-best-000001000/m5out
+     * The visualization of the system is in config.dot.pdf. The statistics reported from gem5 are in stats.txt
+    * This scenario has the debugging messages enabled, so the statistics 
+      are not meaningful. 
+    * To run a performance simulation and gather meaningful statistics you
+      should uncomment a single line in the scenario script:
+      * vi ./scenarios/0-demo/1-singlepim-pagerank.sh
+      Uncomment this line:
+      #   load_model gem5_perf_sim.sh
+      Now remove the previous checkpoint:
+      ./scenarios/0-demo/1-singlepim-pagerank.sh -r
+      (VERY IMPORTANT: every time a hardware or firmware parameter is 
+      changed the checkpoint must be deleted and retaken):
+      And run the simulation again:
+     ./scenarios/0-demo/1-singlepim-pagerank.sh -o
+      This time, no debugging messages will be displayed and statistics 
+      are meaningful.
+    * The source code for the page-rank algorithm is available in:
+      ./SW/PIM/kernels/sgraph_page_rank.c 
 
     ----------------------- AN INTERACTIVE SCENARIO---------------------------
     * Run the second demo scenario:    
