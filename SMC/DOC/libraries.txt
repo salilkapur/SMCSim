@@ -1,8 +1,0 @@
-        zlibc
-        zlib1g
-        zlib1g-dev
-        libprotobuf-dev
-        protobuf-compiler
-        libgoogle-perftools-dev
-        python-pydot
-        gnuplot-x11             (use -q to to disable gnuplots)

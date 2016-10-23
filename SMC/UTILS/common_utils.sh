@@ -626,7 +626,7 @@ function print_versions()
 	echo "	$(${HOST_CROSS_COMPILE}gcc --version | grep gcc 2>&1 )"
 	echo "	$(python --version 2>&1 )"
 	echo "	$(perl --version | grep -m 1 perl 2>&1 )"
-	echo "	$(vsim -version 2>&1 )"
+# 	echo "	$(vsim -version 2>&1 )"
 	echo "	$(gnuplot --version 2>&1 )"
 	echo "	$(swig -version | grep -m 1 SWIG 2>&1 )"
 	echo "	$(m4 --version | grep -m 1 m4 2>&1 )"

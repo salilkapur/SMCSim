@@ -74,8 +74,8 @@ touch access_test
 rm access_test
 cd $SMC_BASE_DIR
 
-print_msg "${COLOR_GREEN}REQUIRED LIBRARIES ... $COLOR_RED(Please check manually!)"
-cat DOC/libraries.txt
+print_msg "${COLOR_GREEN}DEPENDENCIES ... $COLOR_RED(Please check manually!)"
+cat DOC/dependencies.txt
 echo
 print_msg "${COLOR_GREEN}REQUIRED VERSIONS ...  $COLOR_RED(Recommended Distribution: Ubuntu 14.04.4 LTS)"
 cat DOC/versions.txt
