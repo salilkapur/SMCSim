@@ -4,8 +4,10 @@
         libprotobuf-dev
         protobuf-compiler
         libgoogle-perftools-dev
-        gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu
-        g++-arm-linux-gnueabihf g++-aarch64-linux-gnu
+        gcc-arm-linux-gnueabihf
+        g++-arm-linux-gnueabihf
+        gcc-aarch64-linux-gnu
+        g++-aarch64-linux-gnu
         swig
         perl
         python-dev

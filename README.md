@@ -54,8 +54,8 @@ the configurtion and build procedure:
 
 * Please make the following checks before continuing:
  * Required tools are already installed and "[   OK  ]" is displayed.
- * Required libraries are all installed (specially protobuf)
- * Required versions match the available versions
+ * Required dependencies are all available.
+ * Required versions match the available versions.
  * We recommend using using Ubuntu 14.04.4 LTS. All dependencies can be
       installed using apt-get.
 

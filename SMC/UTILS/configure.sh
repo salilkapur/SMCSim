@@ -61,7 +61,7 @@ mkdir -p $SMC_WORK_DIR/checkpoints
 mkdir -p $SMC_WORK_DIR/traces
 
 check_work_dir scenarios
-check_work_dir traces
+#check_work_dir traces
 check_work_dir linux_kernel
 check_work_dir gem5-images
 check_work_dir gem5-build
@@ -76,8 +76,9 @@ cd $SMC_BASE_DIR
 
 print_msg "${COLOR_GREEN}DEPENDENCIES ... $COLOR_RED(Please check manually!)"
 cat DOC/dependencies.txt
+echo -e "        ${COLOR_RED}Recommended Distribution: Ubuntu 14.04.4 LTS (All dependencies resolvable with apt-get install)${COLOR_NONE}"
 echo
-print_msg "${COLOR_GREEN}REQUIRED VERSIONS ...  $COLOR_RED(Recommended Distribution: Ubuntu 14.04.4 LTS)"
+print_msg "${COLOR_GREEN}REQUIRED VERSIONS ..."
 cat DOC/versions.txt
 print_msg "${COLOR_GREEN}AVAILABLE VERSIONS ..."
 print_versions
