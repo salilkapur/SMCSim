@@ -667,9 +667,10 @@ function check_disk_images()
 # Check external tools
 function check_external_tools
 {
-    if [ -d $GEM5_BUILD_DIR/$CACTI ]; then
+    if [ -f $GEM5_BUILD_DIR/$CACTI/cacti ]; then
         print_msg "CACTI: $GEM5_BUILD_DIR/$CACTI (For automatic rebuild, remove this directory)"
     else
+        rm -rf $GEM5_BUILD_DIR/$CACTI/
         cp -r $GEM5_UTILS_DIR/$CACTI $GEM5_BUILD_DIR/
         print_msg "Building CACTI ..."
         _PWD=${PWD}
@@ -877,18 +878,30 @@ function call_cacti
 {
     print_msg "Running CACTI ..."
     mkdir -p cacti
+    
+    if ! [ -f $GEM5_BUILD_DIR/$CACTI/cacti ]; then
+        print_err "CACTI not found! please rebuild the scenario with -b switch"
+    fi
 
+    _ERROR=FALSE
     if [ $HAVE_L2_CACHES == TRUE ]; then
         load_model system/cacti_l2.sh system.l2 > cacti/cacti_l2.cfg
-        $GEM5_BUILD_DIR/$CACTI/cacti -infile cacti/cacti_l2.cfg > cacti/cacti_l2.txt
+        $GEM5_BUILD_DIR/$CACTI/cacti -infile cacti/cacti_l2.cfg > cacti/cacti_l2.txt || _ERROR=TRUE
     fi
     
     if [ $HAVE_L1_CACHES == TRUE ]; then
         load_model system/cacti_l1.sh system.cpu0.dcache > cacti/cacti_ld.cfg
-        $GEM5_BUILD_DIR/$CACTI/cacti -infile cacti/cacti_ld.cfg > cacti/cacti_ld.txt
+        $GEM5_BUILD_DIR/$CACTI/cacti -infile cacti/cacti_ld.cfg > cacti/cacti_ld.txt || _ERROR=TRUE
         
         load_model system/cacti_l1.sh system.cpu0.icache > cacti/cacti_li.cfg
-        $GEM5_BUILD_DIR/$CACTI/cacti -infile cacti/cacti_li.cfg > cacti/cacti_li.txt
+        $GEM5_BUILD_DIR/$CACTI/cacti -infile cacti/cacti_li.cfg > cacti/cacti_li.txt || _ERROR=TRUE
+    fi
+    
+    if [ $_ERROR == TRUE ]; then
+        print_err "Error happened in call to CACTI!"    
+        cat cacti/cacti_l2.txt;
+        cat cacti/cacti_ld.txt;
+        cat cacti/cacti_li.txt;
     fi
 }
 
