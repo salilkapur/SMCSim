@@ -21,8 +21,10 @@ endif
 
 #CXXFLAGS = -Wall -Wno-unknown-pragmas -Winline $(DBG) $(OPT) 
 CXXFLAGS = -Wno-unknown-pragmas $(DBG) $(OPT) 
-CXX = g++ -m32
-CC  = gcc -m32
+#CXX = g++ -m32
+#CC  = gcc -m32
+CXX = g++
+CC  = gcc
 
 SRCS  = area.cc bank.cc mat.cc main.cc Ucache.cc io.cc technology.cc basic_circuit.cc parameter.cc \
 		decoder.cc component.cc uca.cc subarray.cc wire.cc htree2.cc \
@@ -31,7 +33,7 @@ SRCS  = area.cc bank.cc mat.cc main.cc Ucache.cc io.cc technology.cc basic_circu
 OBJS = $(patsubst %.cc,obj_$(TAG)/%.o,$(SRCS))
 PYTHONLIB_SRCS = $(patsubst main.cc, ,$(SRCS)) obj_$(TAG)/cacti_wrap.cc
 PYTHONLIB_OBJS = $(patsubst %.cc,%.o,$(PYTHONLIB_SRCS)) 
-INCLUDES       = -I /usr/include/python2.4 -I /usr/lib/python2.4/config
+#INCLUDES       = -I /usr/include/python2.4 -I /usr/lib/python2.4/config
 
 all: obj_$(TAG)/$(TARGET)
 	cp -f obj_$(TAG)/$(TARGET) $(TARGET)
