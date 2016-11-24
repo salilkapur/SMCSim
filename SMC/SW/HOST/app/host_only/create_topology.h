@@ -21,14 +21,16 @@ void create_topology()
         if ( remaining == 0 )
             continue;
 
-        if ( c == NUM_COMPONENTS-1 )
+        if ( c == 0 )
+            component_size = rand()%(remaining/2)+1;
+        else if ( c == NUM_COMPONENTS-1 )
             component_size = remaining;
         else
-            component_size = rand()%remaining+1;
+            component_size = rand()%(remaining)+1;
 
         component_degree = MIN( MAX_COMPONENT_OUTDEGREE, component_size );
-        printf("Component %ld -- Start: %ld, End: %ld, Size: %ld, MaxDegree: %ld \n",
-            c, start, start+component_size-1, component_size, component_degree  );
+        printf("Component %ld -- Size: %ld -- Start: %ld -- End: %ld -- MaxDegree: %ld \n",
+            c, component_size, start, start+component_size-1, component_degree  );
 
         for ( unsigned long n=start; n<start+component_size; n++ )
         {
@@ -43,20 +45,6 @@ void create_topology()
                 assert (nodes[n].successors);
             }
 
-            // /* fill the successor list of node[n] */
-            // for ( unsigned long j=0; j<num_succ; j++ )
-            // {
-            //     unsigned long succ = start + rand()%component_size; // Random;
-
-            //     /* No loop is allowed in the graph*/
-            //     while ( succ == n )
-            //         succ = start + rand()%component_size; // Random;
-
-            //     /* we have found a new successor which we are not already connected to */
-            //     nodes[n].successors[j] = &nodes[succ];
-            //     printf("  node %ld --> %ld\n", n, succ );
-            // }
-
             /* fill the successor list of node[i] */
             unsigned long succ = start + rand()%component_size; // Random;
             for ( unsigned long j=0; j<num_succ; j++ )
@@ -67,7 +55,10 @@ void create_topology()
                     succ = start;
                 /* we have found a new successor which we are not already connected to */
                 nodes[n].successors[j] = &nodes[succ];
-                printf("  node %ld --> %ld\n", n, succ );
+                #ifdef DEBUG
+                //printf("  node %ld --> %ld\n", n, succ );
+                assert( n != succ );
+                #endif
                 succ ++;
             }
         }

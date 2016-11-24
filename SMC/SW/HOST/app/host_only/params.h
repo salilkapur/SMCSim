@@ -4,17 +4,20 @@
 // The seed of the random generator
 #define RANDOM_SEED 0
 
+// Debugging is enabled or not
+//#define DEBUG
+
 // General Graph Parameter
 /****************************************************************************/
 
 // Number of node in the random graph
-#define NODES 100      
+#define NODES 10000      
 
 // Number of components (subgraphs) in the grap
-#define NUM_COMPONENTS 4
+#define NUM_COMPONENTS 5
 
 // Maximum outdegree of each node in the random graph (component connectivity)
-#define MAX_COMPONENT_OUTDEGREE 3
+#define MAX_COMPONENT_OUTDEGREE 5
 
 // Kernel specific parameters
 /****************************************************************************/
