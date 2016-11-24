@@ -3,6 +3,7 @@
 
 void create_topology()
 {
+    srand(0);
     // Initialize the list of lists
     // Later, we should read the graph from data sets
     nodes = (node*)malloc(NODES*sizeof(node));
@@ -14,7 +15,7 @@ void create_topology()
 
     for ( unsigned long i=0; i<NODES; i++ )
     {
-        unsigned long num_succ = (i%step==0)?(rand()%MAX_OUTDEGREE):(0);
+        unsigned long num_succ = rand()%MAX_OUTDEGREE;
         nodes[i].out_degree = num_succ;
         nodes[i].ID = i;
         if ( num_succ == 0 )
