@@ -2,11 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-#define NODES 10000
-#define MAX_OUTDEGREE 10
-#define step 1
-#define BFS_MAX_ITERATIONS 10
+#include "params.h"
 
 /****************************************************************************/
 

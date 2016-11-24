@@ -4,11 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-
-#define NODES 10000
-#define MAX_OUTDEGREE 10
-#define step 1
-#define MAX_WEIGHT 10
+#include "params.h"
 
 /****************************************************************************/
 #define NC   ((unsigned long)(-1))

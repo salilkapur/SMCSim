@@ -3,12 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
-#define NODES 10000
-#define MAX_OUTDEGREE 10
-#define step 1
-#define PAGERANK_MAX_ITERATIONS 100
-#define PAGERANK_MAX_ERROR 0.001
+#include "params.h"
 
 /****************************************************************************/
 

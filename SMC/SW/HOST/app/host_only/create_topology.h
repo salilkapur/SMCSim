@@ -1,7 +1,5 @@
 #ifndef CREATE_GRAPH_TOPOLOGY
-#define fndef CREATE_GRAPH_TOPOLOGY
-
-
+#define CREATE_GRAPH_TOPOLOGY
 
 void create_topology()
 {
@@ -45,6 +43,5 @@ void create_topology()
     }
     successors_list = nodes[0].successors;
 }
-
 
 #endif

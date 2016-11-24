@@ -2,10 +2,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "params.h"
 
-#define NODES 10000
-#define MAX_OUTDEGREE 10
-#define step 1
 
 /****************************************************************************/
 
