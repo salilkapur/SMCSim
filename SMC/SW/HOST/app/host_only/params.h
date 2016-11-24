@@ -5,19 +5,22 @@
 #define RANDOM_SEED 0
 
 // Debugging is enabled or not
-#define DEBUG
+// #define DEBUG
 
 // General Graph Parameter
 /****************************************************************************/
 
 // Number of node in the random graph
-#define NODES 100      
+#define NODES 10000
 
 // Number of components (subgraphs) in the grap
-#define NUM_COMPONENTS 5
+#define NUM_COMPONENTS 2
 
 // Maximum outdegree of each node in the random graph (component connectivity)
 #define MAX_COMPONENT_OUTDEGREE 5
+
+// Number of global edges in the graph (crossing the components)
+#define NUM_GLOBAL_EDGES 200
 
 // Kernel specific parameters
 /****************************************************************************/

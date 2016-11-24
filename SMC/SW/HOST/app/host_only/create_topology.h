@@ -21,8 +21,8 @@ void create_topology()
         if ( remaining == 0 )
             continue;
 
-        if ( c == 0 )
-            component_size = rand()%(remaining/2)+1;
+        if ( c == 0 && NUM_COMPONENTS > 1 )
+            component_size = rand()%(remaining/3)+1;
         else if ( c == NUM_COMPONENTS-1 )
             component_size = remaining;
         else
@@ -56,7 +56,7 @@ void create_topology()
                 /* we have found a new successor which we are not already connected to */
                 nodes[n].successors[j] = &nodes[succ];
                 #ifdef DEBUG
-                printf("  node %ld --> %ld\n", n, succ );
+                //printf("  node %ld --> %ld\n", n, succ );
                 assert( n != succ );
                 #endif
                 succ ++;
@@ -66,6 +66,39 @@ void create_topology()
         remaining -=component_size;
         start += component_size;
     }
+
+    /* Replace some of the local links with global links */
+    printf("Adding %d global links\n", NUM_GLOBAL_EDGES );
+    unsigned long n = 0;
+    unsigned long succ = 0;
+    for (unsigned long i=0; i<NUM_GLOBAL_EDGES; i++)
+    {
+        char found = 1;
+        while (found == 1 || nodes[n].out_degree == 0)
+        {
+            found = 0;
+            n = rand()%NODES;
+            succ = rand()%NODES;
+            while ( succ == n )
+                succ = rand()%NODES;
+
+            /* Check if the connection is already present */
+            for (unsigned long j=0; j< nodes[n].out_degree; j++)
+                if ( nodes[n].successors[j]->ID == succ )
+                {
+                    found = 1;
+                    #ifdef DEBUG
+                    printf("    already connected: %ld --> %ld\n", n, succ );
+                    #endif                    
+                }
+        }
+        nodes[n].successors[0] = &nodes[succ]; // replace the first successor
+
+        #ifdef DEBUG
+        printf("  global edge %ld --> %ld\n", n, succ );
+        #endif
+    }
+
 
     successors_list = nodes[0].successors;
 }
