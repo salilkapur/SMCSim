@@ -124,7 +124,7 @@ void create_graph()
 // Main
 int main(int argc, char *argv[])
 {
-    printf("(main.cpp): Create the graph with %d nodes\n", NODES);
+    printf("(main.cpp): [PR] Create the graph with %d nodes\n", NODES);
     create_graph();
     printf("(main.cpp): Running the golden model ... \n");
     unsigned long retval = run_golden();
