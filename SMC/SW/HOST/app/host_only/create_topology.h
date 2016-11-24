@@ -49,14 +49,14 @@ void create_topology()
             unsigned long succ = start + rand()%component_size; // Random;
             for ( unsigned long j=0; j<num_succ; j++ )
             {
-                if ( succ == n ) // No loop is allowed in the graph
-                    succ++;
-                if ( succ >= start+component_size )
-                    succ = start;
+                // No loop is allowed in the graph
+                if ( succ == n ) succ++;
+                if ( succ >= start+component_size ) succ = start;
+                if ( succ == n ) succ++;
                 /* we have found a new successor which we are not already connected to */
                 nodes[n].successors[j] = &nodes[succ];
                 #ifdef DEBUG
-                //printf("  node %ld --> %ld\n", n, succ );
+                printf("  node %ld --> %ld\n", n, succ );
                 assert( n != succ );
                 #endif
                 succ ++;
@@ -66,8 +66,6 @@ void create_topology()
         remaining -=component_size;
         start += component_size;
     }
-
-
 
     successors_list = nodes[0].successors;
 }

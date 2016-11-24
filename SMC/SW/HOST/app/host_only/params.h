@@ -5,13 +5,13 @@
 #define RANDOM_SEED 0
 
 // Debugging is enabled or not
-//#define DEBUG
+#define DEBUG
 
 // General Graph Parameter
 /****************************************************************************/
 
 // Number of node in the random graph
-#define NODES 10000      
+#define NODES 100      
 
 // Number of components (subgraphs) in the grap
 #define NUM_COMPONENTS 5
