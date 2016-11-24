@@ -16,6 +16,9 @@ void create_topology()
     unsigned long remaining = NODES;
     unsigned long component_size = 0;
     unsigned long component_degree = 0;
+    #ifdef GRAPH_STATS
+    unsigned long num_edges=0;
+    #endif
     for (unsigned long c=0; c < NUM_COMPONENTS; c++ )
     {
         if ( remaining == 0 )
@@ -29,14 +32,17 @@ void create_topology()
             component_size = rand()%(remaining)+1;
 
         component_degree = MIN( MAX_COMPONENT_OUTDEGREE, component_size );
-        printf("Component %ld -- Size: %ld -- Start: %ld -- End: %ld -- MaxDegree: %ld \n",
-            c, component_size, start, start+component_size-1, component_degree  );
-
+        #ifdef GRAPH_STATS
+        num_edges = 0;
+        #endif
         for ( unsigned long n=start; n<start+component_size; n++ )
         {
             unsigned long num_succ = MIN( rand()%(component_degree+1), component_size-1);
             nodes[n].out_degree = num_succ;
             nodes[n].ID = n;
+            #ifdef GRAPH_STATS
+            num_edges += num_succ;
+            #endif
             if ( num_succ == 0 )
                 nodes[n].successors = NULL;
             else
@@ -62,6 +68,13 @@ void create_topology()
                 succ ++;
             }
         }
+        #ifdef GRAPH_STATS
+        printf("Component %4ld -- Size: %8ld -- Start: %8ld -- End: %8ld -- MaxDegree: %4ld -- Links: %8ld \n",
+            c, component_size, start, start+component_size-1, component_degree, num_edges );
+        #else
+        printf("Component %4ld -- Size: %8ld -- Start: %8ld -- End: %8ld -- MaxDegree: %4ld \n",
+            c, component_size, start, start+component_size-1, component_degree );
+        #endif
 
         remaining -=component_size;
         start += component_size;
