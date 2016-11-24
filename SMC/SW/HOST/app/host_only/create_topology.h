@@ -43,18 +43,32 @@ void create_topology()
                 assert (nodes[n].successors);
             }
 
-            /* fill the successor list of node[n] */
+            // /* fill the successor list of node[n] */
+            // for ( unsigned long j=0; j<num_succ; j++ )
+            // {
+            //     unsigned long succ = start + rand()%component_size; // Random;
+
+            //     /* No loop is allowed in the graph*/
+            //     while ( succ == n )
+            //         succ = start + rand()%component_size; // Random;
+
+            //     /* we have found a new successor which we are not already connected to */
+            //     nodes[n].successors[j] = &nodes[succ];
+            //     printf("  node %ld --> %ld\n", n, succ );
+            // }
+
+            /* fill the successor list of node[i] */
+            unsigned long succ = start + rand()%component_size; // Random;
             for ( unsigned long j=0; j<num_succ; j++ )
             {
-                unsigned long succ = start + rand()%component_size; // Random;
-
-                /* No loop is allowed in the graph*/
-                while ( succ == n )
-                    succ = start + rand()%component_size; // Random;
-
+                if ( succ == n ) // No loop is allowed in the graph
+                    succ++;
+                if ( succ >= start+component_size )
+                    succ = start;
                 /* we have found a new successor which we are not already connected to */
                 nodes[n].successors[j] = &nodes[succ];
                 printf("  node %ld --> %ld\n", n, succ );
+                succ ++;
             }
         }
 

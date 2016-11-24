@@ -14,7 +14,7 @@
 #define NUM_COMPONENTS 4
 
 // Maximum outdegree of each node in the random graph (component connectivity)
-#define MAX_COMPONENT_OUTDEGREE 10
+#define MAX_COMPONENT_OUTDEGREE 3
 
 // Kernel specific parameters
 /****************************************************************************/
