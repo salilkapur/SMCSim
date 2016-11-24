@@ -20,7 +20,6 @@ typedef struct Node
 /****************************************************************************/
 
 node* nodes;                 // Graph nodes
-unsigned long successors_size;     // Size of the successors list
 node**  successors_list;     // List of the successors (not used directly)
 
 /****************************************************************************/
