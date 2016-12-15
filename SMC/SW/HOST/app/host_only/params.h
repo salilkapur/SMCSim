@@ -15,7 +15,7 @@
 #define NODES 10000
 
 // Number of components (subgraphs) in the grap
-#define NUM_COMPONENTS 10
+#define NUM_COMPONENTS 20
 
 // Maximum outdegree of each node in the random graph (component connectivity)
 #define MAX_COMPONENT_OUTDEGREE 5
