@@ -116,7 +116,7 @@ void create_topology()
     #ifdef DUMP_GRAPH
     printf("Dumping graph to graph.csv ...\n" );
     FILE *f;
-    f = fopen("graph.csv", "a");
+    f = fopen("graph.csv", "w");
 
     for ( unsigned long r=0; r<NODES; r++ )
     {
