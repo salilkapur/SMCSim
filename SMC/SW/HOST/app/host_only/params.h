@@ -8,20 +8,23 @@
 // #define DEBUG
 #define GRAPH_STATS
 
+// Dump graph into CSV file
+#define DUMP_GRAPH
+
 // General Graph Parameter
 /****************************************************************************/
 
 // Number of node in the random graph
-#define NODES 10000
+#define NODES 1000
 
 // Number of components (subgraphs) in the grap
-#define NUM_COMPONENTS 20
+#define NUM_COMPONENTS 10
 
 // Maximum outdegree of each node in the random graph (component connectivity)
 #define MAX_COMPONENT_OUTDEGREE 5
 
 // Number of global edges in the graph (crossing the components)
-#define NUM_GLOBAL_EDGES 400
+#define NUM_GLOBAL_EDGES 200
 
 // Kernel specific parameters
 /****************************************************************************/

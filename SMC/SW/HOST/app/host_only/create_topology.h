@@ -112,6 +112,22 @@ void create_topology()
 
 
     successors_list = nodes[0].successors;
+
+    #ifdef DUMP_GRAPH
+    printf("Dumping graph to graph.csv ...\n" );
+    FILE *f;
+    f = fopen("graph.csv", "a");
+
+    for ( unsigned long r=0; r<NODES; r++ )
+    {
+        for ( unsigned long c=0; c<nodes[r].out_degree ; c++ )
+        {
+            node*succ = nodes[r].successors[c];
+            fprintf(f, "%ld, %ld\n", r, succ->ID);
+        }
+    }
+    fclose(f);
+    #endif
 }
 
 #endif
