@@ -26,8 +26,10 @@ void create_topology()
 
         if ( c == NUM_COMPONENTS-1 )
             component_size = remaining;
-        else
+        else if ( NUM_COMPONENTS >= 3 )
             component_size = rand()%(remaining/(NUM_COMPONENTS/3))+1;
+        else
+            component_size = rand()%(remaining/(NUM_COMPONENTS))+1;
 
         component_degree = MIN( MAX_COMPONENT_OUTDEGREE, component_size );
         #ifdef GRAPH_STATS
