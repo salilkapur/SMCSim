@@ -2264,9 +2264,9 @@ template<> void Cache<LRU>::ethz_flush_range(unsigned long start_addr, unsigned 
 
         if ( blk )
         {
-            #ifdef ETHZ_DEBUG_CACHE_FLUSH
+            //#ifdef ETHZ_DEBUG_CACHE_FLUSH
             cout << "Flush Address: " << hex << address << dec << " BLOCK: " << blk->print() << " SIZE=" << blk->size << endl;
-            #endif
+            //#endif
             if (blk->isDirty())
             {
                 /*
@@ -2280,7 +2280,7 @@ template<> void Cache<LRU>::ethz_flush_range(unsigned long start_addr, unsigned 
                 pkt->setDataFromBlock (blk->data, blk->size);
                 pkt->setSrc(0);
 
-                // cout << pkt->cmdString() << " 0x" << hex << pkt->getAddr() << " SIZE:" << dec << pkt->getSize() << "(B) @" << curTick() << endl;// " {";
+                cout << pkt->cmdString() << " 0x" << hex << pkt->getAddr() << " SIZE:" << dec << pkt->getSize() << "(B) @" << curTick() << endl;// " {";
                 // int c=(pkt->getSize()>32)?32:pkt->getSize();
                 // cout << "PKT DATA: ";
                 // for ( int i=0; i<c; i++ )

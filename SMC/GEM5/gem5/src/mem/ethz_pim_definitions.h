@@ -1,1 +1,1 @@
-/home/erfan/projects/SMCSim/SMC/SW//PIM//resident/definitions.h
+/home/ubuntu/SMCSim/SMC/SW//PIM//resident/definitions.h

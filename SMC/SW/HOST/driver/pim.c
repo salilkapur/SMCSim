@@ -111,7 +111,7 @@ static int __init pim_init(void)
 		PIM_NOTICE("Error opening the device: %d\n", err);
 		return err;
 	}
-	
+
 	//remapping the physical addresses range to the kernel virtual memory map
 	pimdevice.mem = ioremap_nocache(PHY_BASE, PHY_SIZE);
 	PIM_INFO("PIM physical range [%lx:%lx] mapped to kernel space @ %lx",(ulong_t)PHY_BASE, (ulong_t)(PHY_BASE+PHY_SIZE-1), (unsigned long)pimdevice.mem);
@@ -212,7 +212,7 @@ long pim_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			pim_get_user_pages(ioctl_arg[2*i+1], ioctl_arg[2*i+2]); // TODO: Later: check protection flags of TLB
 		}
 
-		/* 
+		/*
 		  Create a page table and send its pointer to PIM.
 		  Also, flush the caches to make sure the most recent data
 		  is accessible by PIM
@@ -222,14 +222,14 @@ long pim_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	//*******************
 	case PIM_IOCTL_RELEASE_ALL_DATA:	// Release all the pages
 		PIM_INFO("ioctl: release all data");
-		for (i=0; i<pages.count; i++) 
+		for (i=0; i<pages.count; i++)
 		{
 			PIM_INFO("RELEASE PAGE[%d]: PHYSICAL ADDR: 0x%lx  PAGE STRUCT: 0x%lx", i, (ulong_t)pages.physical_addr[i], (ulong_t)(pages.list[i]) );
-			if (!PageReserved(pages.list[i])) 
+			if (!PageReserved(pages.list[i]))
 				SetPageDirty(pages.list[i]);
 			else
 				PIM_WARN("Page was reserved!");
-			page_cache_release(pages.list[i]); 
+			page_cache_release(pages.list[i]);
 			kfree(pages.list);
 		}
 	break;
@@ -261,7 +261,7 @@ ssize_t pim_read(struct file *filp, char __user *buff, size_t count, loff_t *f_p
 ssize_t pim_write(struct file *filp, const char __user *buff, size_t count, loff_t *f_pos)
 {
 	PIM_INFO("pim_write");
-	return -EINVAL;  
+	return -EINVAL;
 }
 
 /*****************************************************/
@@ -295,7 +295,7 @@ int pim_mmap(struct file *filp, struct vm_area_struct *vma)
 	ulong_t vsize = vma->vm_end - vma->vm_start;
 	ulong_t psize = PHY_SIZE - off;
 	PIM_INFO("pim_mmap");
-	
+
 	if (vsize > psize)
 		return -EINVAL; /*  spans too high */
 
@@ -364,7 +364,7 @@ int pim_get_user_pages(ulong_t addr_start, ulong_t n_pages)
 	if (result != n_pages)
 	{
 		PIM_WARN("Could not get requested user-space virtual addresses");
-		PIM_WARN("   Requested: %ld, Obtained: %ld", n_pages, result); 
+		PIM_WARN("   Requested: %ld, Obtained: %ld", n_pages, result);
 		return -ENOMEM;
 	}
 	PIM_INFO("Successfully pinned %ld user pages.", n_pages);
@@ -373,9 +373,9 @@ int pim_get_user_pages(ulong_t addr_start, ulong_t n_pages)
 }
 
 /*
-  Create a Page Table to be used by the PIM device. This structure is 
+  Create a Page Table to be used by the PIM device. This structure is
   placed in the main memory and a pointer to it is passed to PIM. Whenever
-  a miss occurs in the TLB of PIM, It should access this structure and 
+  a miss occurs in the TLB of PIM, It should access this structure and
   update its TLB rules based on this structure
   @vaddr_start: start address of this slice table in the user virtual address
   Notice: This slice table is associated with a contiguous virtual region
@@ -393,15 +393,15 @@ int pim_create_slice_table(ulong_t vaddr_start)
 	ASSERT_RET(pages.physical_addr, "kmalloc failed (pages.physical_addr)", -ENOMEM);
 
 	/* Get the physical address for all pages */
-	for (i=0; i<pages.count; i++) 
+	for (i=0; i<pages.count; i++)
 	{
 		pages.physical_addr[i] = (ulong_t)page_to_phys(pages.list[i]);
 		//PIM_INFO("PAGE[%d]: PHYSICAL ADDR: 0x%lx  PAGE STRUCT: 0x%lx", i, pages.physical_addr[i], (ulong_t)pages.list[i] );
 	}
 
-	/* 
+	/*
 	  Merge the contiguous pages to create slices
-	  Note: even though, the number of slices can be less than the number of pages 
+	  Note: even though, the number of slices can be less than the number of pages
 	  because of merging, to speed-up the procedure, we allocate a slice table equal
 	  to the number of pages.
 
@@ -440,7 +440,7 @@ int pim_create_slice_table(ulong_t vaddr_start)
 	// Print the Slice Table
 	PIM_INFO("-------------------------PIM SLICE TABLE-----------------------------------");
 	PIM_INFO("  Page Order: %d", order);
-	for (i=0; i<pages.count; i++) 
+	for (i=0; i<pages.count; i++)
 		PIM_INFO("0x%lx: SLICE[%d]: VA [0x%lx, 0x%lx] ---> PA [0x%lx, 0x%lx]  %ld(B)", (ulong_t)(&slicetable[i]),
         i, (ulong_t)slicetable[i].vaddr, (ulong_t)(slicetable[i].vaddr+slicetable[i].size-1), (ulong_t)slicetable[i].paddr,
         ((ulong_t)slicetable[i].paddr+slicetable[i].size-1), slicetable[i].size);
@@ -449,7 +449,7 @@ int pim_create_slice_table(ulong_t vaddr_start)
     // Check if the contiguous regions have been merged
     #ifdef DEBUG_DRIVER
     c=0;
-    for (i=0; i<pages.count-1; i++) 
+    for (i=0; i<pages.count-1; i++)
         if (pages.physical_addr[i] + PAGE_SIZE == pages.physical_addr[i+1]) c++; // Number of contiguous slices up to now
     PIM_INFO("#pages:%d   #slices:%d   #merges:%d", pages.count, stat_numslices, c);
 
@@ -459,7 +459,7 @@ int pim_create_slice_table(ulong_t vaddr_start)
 	PIM_INFO("---------------------------------------------------------------------------");
     #endif
 
-	/* 
+	/*
 	  Send the physical pointer to the SliceTable to PIM, so PIM can use it
 	   whenever a miss occurs in its TLBs.
 	*/
@@ -472,7 +472,7 @@ int pim_create_slice_table(ulong_t vaddr_start)
 	PIM_INFO("PIM_SLICEVSTART: 0x%lx", pim_read_ulong_t(PIM_SLICEVSTART));
 
 	/*
-	  Flush the caches to make sure the most recent data is accessible by 
+	  Flush the caches to make sure the most recent data is accessible by
 	  the PIM device.
 	  Notice: cache flushing must be the last step, otherwise some of the
 	  changes won't be reflected
@@ -480,7 +480,7 @@ int pim_create_slice_table(ulong_t vaddr_start)
 	//pim_write_byte(PIM_M5_REG, PIM_TIME_STAMP + 3);
 	pim_cache_flush();
 	//pim_write_byte(PIM_M5_REG, PIM_TIME_STAMP + 4);
-	
+
 	/**** Do not put anything here ****/
 	return 0;
 }
@@ -525,7 +525,8 @@ int pim_cache_flush()
 	*/
 	ulong_t i;
 	PIM_INFO("Flushing the caches using a simulation hack");
-	for (i=0; i<pages.count; i++) 
+    /*
+	for (i=0; i<pages.count; i++)
 	{
 		//PIM_INFO("Flushed L2: pages.physical_addr[%ld]=0x%lx", i, pages.physical_addr[i]);
 		pim_write_ulong_t(PIM_M5_D1_REG, (ulong_t)(pages.physical_addr[i]));
@@ -535,6 +536,7 @@ int pim_cache_flush()
         pim_read_ulong_t(PIM_M5_D2_REG);
 		pim_write_byte(PIM_M5_REG, PIM_HOST_CACHE_FLUSH_HACK);
 	}
+    */
 	PIM_INFO("Flushing the slice-table itself");
 	pim_write_ulong_t(PIM_M5_D1_REG, (ulong_t)(slicetable_paddr));
 	pim_write_ulong_t(PIM_M5_D2_REG, (ulong_t)(slicetable_paddr + pages.count*sizeof(Slice)-1));
@@ -546,12 +548,12 @@ int pim_cache_flush()
 //  PIM_INFO("Flushing the slice-table itself");
 //	void * kaddr;
 //	PIM_INFO("Flushing the caches for user pages ...");
-//	for (i=0; i<pages.count; i++) 
+//	for (i=0; i<pages.count; i++)
 //	{
 //		// Make sure that the lower bits are zero
 //		ASSERT_DBG( GET_BIT_RANGE(pages.physical_addr[i], PAGE_SHIFT-1, 0) == 0 );
 //
-//		/* 
+//		/*
 //		  create a kernel-space mapping, the L1 cache maintenance functions
 //		  work on kernel virtual addresses. They only exist for low memory
 //		 */

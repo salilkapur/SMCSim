@@ -1,0 +1,98 @@
+From 4fa2f72a5a3f0296d2b66814c2b21e9ae854956b Mon Sep 17 00:00:00 2001
+From: Salil Kapur <salilkapur93@gmail.com>
+Date: Wed, 14 Nov 2018 15:51:24 -0500
+Subject: [PATCH] Adding logic to flush cache after TLB update in PIM
+
+---
+ SMC/GEM5/gem5/src/mem/ethz_tlb.cc | 28 ++++++++++++++++++++++++----
+ SMC/GEM5/gem5/src/mem/ethz_tlb.hh |  1 +
+ 2 files changed, 25 insertions(+), 4 deletions(-)
+
+diff --git a/SMC/GEM5/gem5/src/mem/ethz_tlb.cc b/SMC/GEM5/gem5/src/mem/ethz_tlb.cc
+index 030d6e2..10b5344 100644
+--- a/SMC/GEM5/gem5/src/mem/ethz_tlb.cc
++++ b/SMC/GEM5/gem5/src/mem/ethz_tlb.cc
+@@ -64,6 +64,15 @@ ethz_TLB::ethz_TLB(const ethz_TLBParams* p) :
+     }
+
+     lastUsed.push_back((Tick)-1);
++
++    // Add references to all l2 caches
++    // TODO: Update this to search for L3 cache later
++    SimObject* f = SimObject::find("system.l2");
++       if ( f )
++               system_caches.push_back(f);
++       else
++               cout << "Warning: system.l2 is not present!" << endl;
++
+ }
+
+ Addr
+@@ -113,7 +122,7 @@ ethz_TLB::remap(Addr addr)
+ {
+     DPRINTF(ethz_TLB, "remap: addr 0x%x\n", addr );
+     TLBAccess++;
+-
++
+     for (int i = 0; i < originalRanges.size(); ++i) {
+         if (originalRanges[i].contains(addr)) {
+             if ( i > 0)
+@@ -378,7 +387,7 @@ ethz_TLB::recvTimingReq(PacketPtr pkt)
+             if ( remap_check(a) == -1 )
+                 refillTLB_functional(a);
+         }
+-        return true;
++        return true;
+     }
+     bool needsResponse = pkt->needsResponse();
+     bool memInhibitAsserted = pkt->memInhibitAsserted();
+@@ -421,7 +430,7 @@ ethz_TLB::recvTimingReq(PacketPtr pkt)
+             else
+                 (*DUMP_FILE) << "R" << endl;
+         }
+-
++
+         pkt->setAddr(remapped_addr);
+         pkt->IS_REMAPPED = true;
+     }
+@@ -666,7 +675,7 @@ void ethz_TLB::updateTLB(unsigned long vaddr, unsigned long paddr, unsigned long
+ {
+     if ( originalRanges.size() >= TLB_SIZE )
+     {
+-        /*
++        /*
+         Remove the LRU Rule
+         The first rule should never be replaced
+          */
+@@ -781,6 +790,17 @@ bool ethz_TLB::refillTLB_functional(Addr addr)
+     #endif
+     updateTLB(vaddr, paddr, size);
+
++    // This is a potential place to flush the cache
++    unsigned long start_addr = paddr;
++    unsigned long end_addr = paddr + size;
++    cout << "[PASSIVE CFLUSH] START: " << start_addr << " END: " << end_addr << endl;
++    for ( int i=0; i< system_caches.size(); i++ )
++       {
++           BaseCache* c = dynamic_cast<BaseCache*>(system_caches[i]);
++           cout << "CACHE: " << c->name() << endl;
++           c->ethz_flush_range(start_addr, end_addr);
++       }
++
+     delete pkt; // Packet will delete its request and its data
+     return true;
+ }
+diff --git a/SMC/GEM5/gem5/src/mem/ethz_tlb.hh b/SMC/GEM5/gem5/src/mem/ethz_tlb.hh
+index bf4bc9f..a2ab562 100644
+--- a/SMC/GEM5/gem5/src/mem/ethz_tlb.hh
++++ b/SMC/GEM5/gem5/src/mem/ethz_tlb.hh
+@@ -83,6 +83,7 @@ private:
+     */
+     std::vector<Tick> lastUsed;
+     std::vector<Addr> pending_refills; // Multiple pending addresses refill the rule for
++       vector<SimObject*> system_caches; // Store reference to system caches
+
+     unsigned long int PIM_DTLB_IDEAL_REFILL_REG; // Register for refill request from software
+     unsigned long int HMC_ATOMIC_INCR;
+--
+2.11.1

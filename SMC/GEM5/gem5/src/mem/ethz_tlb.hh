@@ -9,6 +9,7 @@
 #include "sim/system.hh"
 #include "sim/stats.hh"
 #include "dev/ethz_dma.hh"
+#include "mem/cache/base.hh"
 #include <deque>
 
 using namespace std;
@@ -83,6 +84,7 @@ private:
     */
     std::vector<Tick> lastUsed;
     std::vector<Addr> pending_refills; // Multiple pending addresses refill the rule for
+    std::vector<SimObject*> system_caches;
 
     unsigned long int PIM_DTLB_IDEAL_REFILL_REG; // Register for refill request from software
     unsigned long int HMC_ATOMIC_INCR;

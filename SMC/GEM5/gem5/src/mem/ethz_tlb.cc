@@ -113,7 +113,7 @@ ethz_TLB::remap(Addr addr)
 {
     DPRINTF(ethz_TLB, "remap: addr 0x%x\n", addr );
     TLBAccess++;
-	
+
     for (int i = 0; i < originalRanges.size(); ++i) {
         if (originalRanges[i].contains(addr)) {
             if ( i > 0)
@@ -378,7 +378,7 @@ ethz_TLB::recvTimingReq(PacketPtr pkt)
             if ( remap_check(a) == -1 )
                 refillTLB_functional(a);
         }
-        return true;       
+        return true;
     }
     bool needsResponse = pkt->needsResponse();
     bool memInhibitAsserted = pkt->memInhibitAsserted();
@@ -421,7 +421,7 @@ ethz_TLB::recvTimingReq(PacketPtr pkt)
             else
                 (*DUMP_FILE) << "R" << endl;
         }
-        
+
         pkt->setAddr(remapped_addr);
         pkt->IS_REMAPPED = true;
     }
@@ -666,7 +666,7 @@ void ethz_TLB::updateTLB(unsigned long vaddr, unsigned long paddr, unsigned long
 {
     if ( originalRanges.size() >= TLB_SIZE )
     {
-        /* 
+        /*
         Remove the LRU Rule
         The first rule should never be replaced
          */
@@ -690,6 +690,39 @@ void ethz_TLB::updateTLB(unsigned long vaddr, unsigned long paddr, unsigned long
     originalRanges.push_back(AddrRange(vaddr, vaddr + size-1));
     remappedRanges.push_back(AddrRange(paddr, paddr + size-1));
     lastUsed.push_back(curTick());
+
+    // This is a potential place to flush the cache
+
+    SimObject* f = SimObject::find("system.cpu0.dcache");
+    if ( f )
+        system_caches.push_back(f);
+    else
+        cout << "[PIM_TEST] Warning: system.cpu.dcache is not present!" << endl;
+
+    f = SimObject::find("system.cpu1.dcache");
+    if ( f )
+        system_caches.push_back(f);
+    else
+        cout << "[PIM_TEST] Warning: system.cpu.dcache is not present!" << endl;
+
+
+
+    f = SimObject::find("system.l2");
+    if ( f )
+        system_caches.push_back(f);
+    else
+        cout << "[PIM_TEST] Warning: system.l2 is not present!" << endl;
+
+    unsigned long start_addr = paddr;
+    unsigned long end_addr = paddr + size - 1;
+    //cout << "[PASSIVE CFLUSH] START: " << start_addr << " END: " << end_addr << endl;
+    for ( int i=0; i< system_caches.size(); i++ )
+       {
+           BaseCache* c = dynamic_cast<BaseCache*>(system_caches[i]);
+           //cout << "CACHE: " << c->name() << endl;
+           c->ethz_flush_range(start_addr, end_addr);
+       }
+
 
     #ifdef ETHZ_DEBUG_PIM_TLB
     //printTLB();
