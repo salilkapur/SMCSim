@@ -4,4 +4,4 @@ SMC/UTILS/variables/
 
 # Python
 *.pyc
-
+*.tgz
