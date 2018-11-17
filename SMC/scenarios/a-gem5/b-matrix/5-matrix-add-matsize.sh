@@ -6,8 +6,8 @@ GEM5_STATISTICS=(
 "sim_ticks.host"
 )
 
-VALUES0=( "128" "512" "1024" "2048" "4096" )
-#VALUES0=( "64" )
+VALUES0=( "128" "256" "512" "1024" "2048")
+#VALUES0=( "256" )
 
 for V0 in ${VALUES0[*]}
 do
